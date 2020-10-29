@@ -1,5 +1,5 @@
 import UserRequest from './UserRequest';
-import StudentRequest from './StudentRequest';
+import EmployeeRequest from './EmployeeRequest';
 import TranslateRequest from './TranslateRequest';
 import WordRequest from './WordRequest';
 import CategoryRequest from './CategoryRequest';
@@ -8,7 +8,7 @@ import NotificationRequest from './NotificationRequest';
 
 const requestMap = {
     UserRequest,
-    StudentRequest,
+    EmployeeRequest,
     TranslateRequest,
     WordRequest,
     CategoryRequest,

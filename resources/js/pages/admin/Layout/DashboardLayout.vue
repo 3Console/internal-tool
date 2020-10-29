@@ -8,9 +8,9 @@
         <md-icon>dashboard</md-icon>
         <p>Trang chủ</p>
       </sidebar-link>
-      <sidebar-link to="/admin/student">
+      <sidebar-link to="/admin/employee">
         <md-icon>content_paste</md-icon>
-        <p>Sinh viên</p>
+        <p>Nhân viên</p>
       </sidebar-link>
     </side-bar>
 

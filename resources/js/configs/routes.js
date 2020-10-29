@@ -3,7 +3,7 @@ import Register from '@/pages/RegisterPage.vue';
 
 import AdminDashboardLayout from '@/pages/admin/Layout/DashboardLayout.vue'
 import AdminDashboard from '@/pages/admin/Dashboard.vue';
-import AdminStudent from '@/pages/admin/Student.vue';
+import AdminEmployee from '@/pages/admin/Employee.vue';
 
 import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
 import WordList from '@/pages/user/WordList.vue';
@@ -64,7 +64,7 @@ export default {
                     meta: {
                         requiresAuth: true
                     }
-                    
+
                 },
                 {
                     path: 'category',
@@ -111,9 +111,9 @@ export default {
                     }
                 },
                 {
-                    path: 'student',
-                    name: 'Sinh viên',
-                    component: AdminStudent,
+                    path: 'employee',
+                    name: 'Nhân viên',
+                    component: AdminEmployee,
                     meta: {
                         requiresAdmin: true
                     }

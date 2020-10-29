@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="masterdata-version">
-    <link rel="icon" type="image/png" href="/favicon.png"/>
+    <link rel="icon" type="image/png" href="/vue.png"/>
     @if (Auth::check())
         <meta name="authenticated" content="1">
     @endif

@@ -1,5 +1,5 @@
 <template>
-  <modal name="student"
+  <modal name="employee"
       height="auto"
       :scrollable="true"
       :click-to-close="true"
@@ -9,7 +9,7 @@
 
         <div class="content">
           <div slot="top-right">
-            <md-button class="top-right md-icon-button md-accent" @click="$modal.hide('student')">
+            <md-button class="top-right md-icon-button md-accent" @click="$modal.hide('employee')">
               <md-icon>close</md-icon>
             </md-button>
           </div>
@@ -23,7 +23,7 @@
                       data-vv-as="name"
                       v-validate="'required|max:30'"
                       data-vv-scope="general"
-                      v-model="student.full_name"
+                      v-model="employee.full_name"
                       :class="errors.has(`general.${_uid}_name`) ? 'is-invalid' : ''"
                       md-counter="30">
             </md-input>
@@ -41,7 +41,7 @@
                       data-vv-as="username"
                       v-validate="'required|min:6|max:30'"
                       data-vv-scope="general"
-                      v-model="student.name"
+                      v-model="employee.name"
                       :class="errors.has(`general.${_uid}_username`) ? 'is-invalid' : ''"
                       md-counter="30">
            </md-input>
@@ -59,7 +59,7 @@
                       data-vv-as="email"
                       v-validate="'required|email'"
                       data-vv-scope="general"
-                      v-model="student.email"
+                      v-model="employee.email"
                       :class="errors.has(`general.${_uid}_email`) ? 'is-invalid' : ''">
             </md-input>
             <div v-if="errors.has(`general.${_uid}_email`)">
@@ -79,7 +79,7 @@
                         ref="password"
                         v-validate="'required|min:6|max:30'"
                         data-vv-scope="general"
-                        v-model="student.password"
+                        v-model="employee.password"
                         :disabled="!!editingId && !isEditPassword"
                         :class="errors.has(`general.${_uid}_password`) ? 'is-invalid' : ''">
              </md-input>
@@ -97,7 +97,7 @@
                         data-vv-as="retype password"
                         v-validate="'required|confirmed:password'"
                         data-vv-scope="general"
-                        v-model="student.retype_password"
+                        v-model="employee.retype_password"
                         :disabled="!!editingId && !isEditPassword"
                         :class="errors.has(`general.${_uid}_password`) ? 'is-invalid' : ''">
               </md-input>
@@ -121,10 +121,10 @@ import rf from '../requests/RequestFactory';
 export default {
   data () {
     return {
-      title: 'Student',
+      title: 'employee',
       editingId: '',
       isEditPassword: false,
-      student: {
+      employee: {
         full_name: '',
         name: '',
         email: '',
@@ -134,17 +134,17 @@ export default {
   methods: {
     beforeOpen (event) {
       this.title = event.params.title;
-      if(event.params.studentId) {
-        this.editingId = event.params.studentId;
-        rf.getRequest('StudentRequest').show(this.editingId).then((student)=>{
-          this.student = student;
+      if(event.params.employeeId) {
+        this.editingId = event.params.employeeId;
+        rf.getRequest('EmployeeRequest').show(this.editingId).then((employee)=>{
+          this.employee = employee;
         });
       }
     },
     beforeClose() {
       this.editingId = '';
       this.isEditPassword = false,
-      this.student = {
+      this.employee = {
         name: '',
         full_name: '',
         email: '',
@@ -158,34 +158,34 @@ export default {
               return;
             }
             if(this.editingId) {
-              this.updateOneStudent();
+              this.updateOneEmployee();
             } else {
-              this.createOneStudent();
+              this.createOneEmployee();
             }
         });
       },
-    updateOneStudent() {
-      let params = this.student;
+    updateOneEmployee() {
+      let params = this.employee;
       if(!this.isEditPassword) {
         params = {};
-        params.name = this.student.name;
-        params.full_name = this.student.full_name;
-        params.email = this.student.email;
+        params.name = this.employee.name;
+        params.full_name = this.employee.full_name;
+        params.email = this.employee.email;
       }
-      rf.getRequest('StudentRequest').update(this.editingId, params).then((res)=> {
-        this.$modal.hide('student');
+      rf.getRequest('EmployeeRequest').update(this.editingId, params).then((res)=> {
+        this.$modal.hide('employee');
         this.$emit('refresh');
       });
-      this.$toasted.show('Cập nhật sinh viên thành công!', {
+      this.$toasted.show('Cập nhật nhân viên thành công!', {
         theme: 'bubble',
         position: 'top-right',
         duration : 1500,
         type: 'success'
       });
     },
-    createOneStudent() {
-          rf.getRequest('StudentRequest').store(this.student).then((res)=>{
-            this.$modal.hide('student');
+    createOneEmployee() {
+          rf.getRequest('EmployeeRequest').store(this.employee).then((res)=>{
+            this.$modal.hide('employee');
             this.$emit('refresh');
           }).catch((err) => {
             // this.$toasted.show('Đã có lỗi xảy ra, vui lòng kiểm tra lại!', {
@@ -197,7 +197,7 @@ export default {
           });
     },
     cancel() {
-      this.$modal.hide('student');
+      this.$modal.hide('employee');
     }
   }
 }

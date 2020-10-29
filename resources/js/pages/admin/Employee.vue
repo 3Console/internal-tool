@@ -14,15 +14,15 @@
         <div class="md-layout-item md-size-35">
         </div>
         <div class="md-layout-item">
-          <md-button  class="md-success" @click="createStudent">Thêm</md-button>
+          <md-button  class="md-success" @click="createEmployee">Thêm</md-button>
           <md-button  class="md-info" @click="refresh">Làm mới</md-button>
-          <md-button  class="md-danger" @click="removeManyStudent()">Xóa</md-button>
+          <md-button  class="md-danger" @click="removeManyEmployees()">Xóa</md-button>
         </div>
       </div>
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">Quản lí sinh viên</h4>
+            <h4 class="title">Quản lí nhân viên</h4>
             <p class="category">Here is a subtitle for this table</p>
           </md-card-header>
           <md-card-content>
@@ -45,11 +45,11 @@
                     <td class="text-center" v-html="item.full_name"></td>
                     <td class="text-center" v-html="item.created_at"></td>
                     <td class="text-center">
-                        <md-button class="md-just-icon md-simple md-primary" @click="editStudent(item.id)">
+                        <md-button class="md-just-icon md-simple md-primary" @click="editEmployee(item.id)">
                           <md-icon>edit</md-icon>
                           <md-tooltip md-direction="top">Sửa</md-tooltip>
                         </md-button>
-                        <md-button class="md-just-icon md-simple md-danger" @click="removeOneStudent(item.id)">
+                        <md-button class="md-just-icon md-simple md-danger" @click="removeOneEmployee(item.id)">
                           <md-icon>close</md-icon>
                           <md-tooltip md-direction="top">Xóa</md-tooltip>
                         </md-button>
@@ -61,7 +61,7 @@
         </md-card>
       </div>
       <v-dialog/>
-      <StudentModal @refresh="refresh()"/>
+      <EmployeeModal @refresh="refresh()"/>
     </div>
   </div>
 </template>
@@ -73,13 +73,13 @@ import {
 } from '@/components'
 
 import rf from '../../requests/RequestFactory';
-import StudentModal from '../../modals/Student'
+import EmployeeModal from '../../modals/Employee';
 
 export default{
   components: {
     OrderedTable,
     SimpleTable,
-    StudentModal
+    EmployeeModal
   },
   data () {
     return {
@@ -88,7 +88,7 @@ export default{
     }
   },
   methods: {
-    removeOneStudent(studentId) {
+    removeOneEmployee(employeeId) {
       this.$modal.show('dialog', {
         title: 'Cảnh báo!',
         text: 'Bạn có chắc chắn muốn xóa ?',
@@ -103,10 +103,10 @@ export default{
             title: 'Xác nhận',
             default: true,
             handler: () => {
-              return rf.getRequest('StudentRequest').removeOneStudent(studentId).then(() => {
+              return rf.getRequest('EmployeeRequest').removeOneEmployee(employeeId).then(() => {
                 this.$modal.hide('dialog');
                 this.$refs.datatable.refresh();
-                this.$toasted.show('Xóa sinh viên thành công!', {
+                this.$toasted.show('Xóa nhân viên thành công!', {
                   theme: 'bubble',
                   position: 'top-right',
                   duration : 1500,
@@ -118,7 +118,7 @@ export default{
         ]
       });
     },
-    removeManyStudent() {
+    removeManyEmployees() {
         this.$modal.show('dialog', {
           title: 'Cảnh báo!',
           text: 'Bạn có chắc chắn muốn xóa ?',
@@ -133,14 +133,14 @@ export default{
               title: 'Xác nhận',
               default: true,
               handler: () => {
-                const studentIds = this.$refs.datatable.rows.filter((row) => {
+                const employeeIds = this.$refs.datatable.rows.filter((row) => {
                   return row.selected === true;
                 }).map(record => record.id);
 
-                return rf.getRequest('StudentRequest').removeManyStudents(studentIds).then(() => {
+                return rf.getRequest('EmployeeRequest').removeManyEmployeess(employeeIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Student removed successfully!', {
+                  this.$toasted.show('Xóa nhân viên thành công!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,
@@ -152,11 +152,11 @@ export default{
           ]
         });
       },
-      createStudent() {
-        this.$modal.show('student', {title: 'Thêm sinh viên'});
+      createEmployee() {
+        this.$modal.show('employee', {title: 'Thêm nhân viên'});
       },
-      editStudent(studentId) {
-        this.$modal.show('student', {title: 'Sửa thông tin sinh viên', studentId: studentId});
+      editEmployee(employeeId) {
+        this.$modal.show('employee', {title: 'Sửa thông tin nhân viên', employeeId: employeeId});
       },
       listenSelectRow() {
         if (!this.$refs.datatable) {
@@ -169,7 +169,7 @@ export default{
         const meta = Object.assign({}, params, {
           search: this.searchInput,
         });
-        return rf.getRequest('StudentRequest').getStudents(meta);
+        return rf.getRequest('EmployeeRequest').getStudents(meta);
       },
       refresh() {
         this.isLoading = true;
