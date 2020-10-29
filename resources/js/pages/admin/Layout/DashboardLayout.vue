@@ -12,6 +12,18 @@
         <md-icon>content_paste</md-icon>
         <p>Nhân viên</p>
       </sidebar-link>
+      <sidebar-link to="/admin/absence">
+        <md-icon>content_paste</md-icon>
+        <p>Xét duyệt nghỉ phép</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/overtime">
+        <md-icon>content_paste</md-icon>
+        <p>Xét duyệt OT</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/salary">
+        <md-icon>content_paste</md-icon>
+        <p>Bảng lương tháng</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">
