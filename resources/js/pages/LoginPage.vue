@@ -3,8 +3,8 @@
     <md-content class="md-elevation-3 login">
 
         <div class="title">
-            <img src="/images/login-logo.png">
-            <div class="md-title">Vocabulary Learning</div>
+            <img src="https://vuematerial.io/assets/logo-color.png">
+            <div class="md-title">Internal Tool</div>
         </div>
 
         <div class="form">
@@ -27,12 +27,12 @@
             </div>
         </div>
 
-        <div class="actions md-layout md-alignment-center-space-between" style="float: left;">
+        <div class="actions md-layout md-alignment-center-space-between" style="float: left; display: none;">
             <a style="color: black;" @click="redirectToRegister()">Đăng ký tài khoản</a>
         </div>
 
-        <div class="actions md-layout md-alignment-center-space-between" style="float: right;">
-            <a-button type="primary" size="large" @click="submit">Đăng nhập</a-button>
+        <div class="actions md-layout md-alignment-center">
+            <a-button type="primary" size="large" @click="submit" style="width: 100%">Đăng nhập</a-button>
         </div>
 
         <div class="loading-overlay" v-if="loading">
