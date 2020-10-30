@@ -17,7 +17,6 @@
         "google/cloud-translate": "^1.9",
         "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.5",
-        "joggapp/laravel-google-translate": "^6.0",
         "laravel/framework": "5.8.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "^1.0",
