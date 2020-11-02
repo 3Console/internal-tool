@@ -5,6 +5,7 @@ import WordRequest from './WordRequest';
 import CategoryRequest from './CategoryRequest';
 import GameRequest from './GameRequest';
 import NotificationRequest from './NotificationRequest';
+import UserAbsenceRequest from './UserAbsenceRequest';
 
 const requestMap = {
     UserRequest,
@@ -13,7 +14,8 @@ const requestMap = {
     WordRequest,
     CategoryRequest,
     GameRequest,
-    NotificationRequest
+    NotificationRequest,
+    UserAbsenceRequest
 };
 
 const instances = {};

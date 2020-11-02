@@ -64,6 +64,10 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::delete('many-students', 'StudentController@deleteManyStudent');
 });
 
+Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
+    Route::get('/absence-requests', 'UserAbsenceController@getUserAbsenceRequests');
+});
+
 Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user'], function () {
     Route::get('/info', function () {
         return "hihi";
