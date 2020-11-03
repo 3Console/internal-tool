@@ -68,6 +68,10 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::get('/absence-requests', 'UserAbsenceController@getUserAbsenceRequests');
 });
 
+Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
+    Route::get('/overtime-requests', 'UserOvertimeController@getUserOvertimeRequests');
+});
+
 Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user'], function () {
     Route::get('/info', function () {
         return "hihi";
