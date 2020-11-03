@@ -19,4 +19,18 @@ class UserAbsenceController extends Controller
     {
         return $this->userAbsenceService->getUserAbsenceRequests($request->all());
     }
+
+    public function approveRequest(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $approveRequest = $this->userAbsenceService->approveRequest($request->all());
+            DB::commit();
+            return $approveRequest;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
 }

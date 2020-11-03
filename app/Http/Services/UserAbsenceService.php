@@ -10,10 +10,21 @@ class UserAbsenceService
     public function getUserAbsenceRequests($params)
     {
         $limit = array_get($params, 'limit', 10);
-        return UserAbsenceRequest::join('users', 'user_absence_requests.user_id', 'users.id')->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
-            $search = array_get($params, 'search');
-            return $query->where('user_absence_requests.title', 'like', "%$search%")
-                        ->orWhere('user_absence_requests.status', 'like', "%$search%");
-        })->orderBy('user_absence_requests.created_at', 'desc')->paginate($limit);
+        return UserAbsenceRequest::join('users', 'user_absence_requests.user_id', 'users.id')
+            ->select('users.id', 'user_absence_requests.id as request_id', 'users.name', 'user_absence_requests.title', 'user_absence_requests.status', 'user_absence_requests.created_at')
+            ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+                $search = array_get($params, 'search');
+                return $query->where('user_absence_requests.title', 'like', "%$search%")
+                            ->orWhere('user_absence_requests.status', 'like', "%$search%");
+                })->orderBy('user_absence_requests.created_at', 'desc')
+            ->paginate($limit);
+    }
+
+    public function approveRequest($input)
+    {
+        $userAbsence = UserAbsenceRequest::where('id', $input['id'])->first();
+        $userAbsence->status = 'approve';
+        $userAbsence->save();
+        return $userAbsence;
     }
 }
