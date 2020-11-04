@@ -33,4 +33,18 @@ class UserAbsenceController extends Controller
             throw $e;
         }
     }
+
+    public function rejectRequest(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $rejectRequest = $this->userAbsenceService->rejectRequest($request->all());
+            DB::commit();
+            return $rejectRequest;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
 }

@@ -23,7 +23,15 @@ class UserAbsenceService
     public function approveRequest($input)
     {
         $userAbsence = UserAbsenceRequest::where('id', $input['id'])->first();
-        $userAbsence->status = 'approve';
+        $userAbsence->status = 'approved';
+        $userAbsence->save();
+        return $userAbsence;
+    }
+
+    public function rejectRequest($input)
+    {
+        $userAbsence = UserAbsenceRequest::where('id', $input['id'])->first();
+        $userAbsence->status = 'rejected';
         $userAbsence->save();
         return $userAbsence;
     }

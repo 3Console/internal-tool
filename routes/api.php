@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
     Route::get('/absence-requests', 'UserAbsenceController@getUserAbsenceRequests');
     Route::post('absence-requests/approve', 'UserAbsenceController@approveRequest');
+    Route::post('absence-requests/reject', 'UserAbsenceController@rejectRequest');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {

@@ -49,7 +49,7 @@
                           <md-icon>edit</md-icon>
                           <md-tooltip md-direction="top">Phê duyệt</md-tooltip>
                         </md-button>
-                        <md-button class="md-just-icon md-simple md-danger">
+                        <md-button class="md-just-icon md-simple md-danger" @click="rejectRequest(item.request_id)">
                           <md-icon>close</md-icon>
                           <md-tooltip md-direction="top">Từ chối</md-tooltip>
                         </md-button>
@@ -99,6 +99,36 @@
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
                   this.$toasted.show('Phê duyệt thành công!', {
+                    theme: 'bubble',
+                    position: 'bottom-right',
+                    duration : 1500,
+                    type: 'success'
+                  });
+                });
+              }
+            },
+          ]
+        });
+      },
+      rejectRequest(requestId) {
+        this.$modal.show('dialog', {
+          title: 'Cảnh báo!',
+          text: 'Bạn có muốn từ chối yêu cầu này ?',
+          buttons: [
+            {
+              title: 'Bỏ qua',
+              handler: () => {
+                this.$modal.hide('dialog');
+              }
+            },
+            {
+              title: 'Xác nhận',
+              default: true,
+              handler: () => {
+                return rf.getRequest('UserAbsenceRequest').rejectRequest({ id: requestId }).then(() => {
+                  this.$modal.hide('dialog');
+                  this.$refs.datatable.refresh();
+                  this.$toasted.show('Từ chối thành công!', {
                     theme: 'bubble',
                     position: 'bottom-right',
                     duration : 1500,
