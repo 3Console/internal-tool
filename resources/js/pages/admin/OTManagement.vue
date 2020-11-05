@@ -33,6 +33,7 @@
                 <th class="col_title_en">Tên đăng nhập</th>
                 <th class="col_title_jp">Tiêu đề</th>
                 <th class="col_created_at">Thời gian OT</th>
+                <th class="col_status">Tình trạng</th>
                 <th class="col_tools">Công cụ</th>
                 <template slot="body" slot-scope="{ item }">
                   <tr>
@@ -42,14 +43,15 @@
                     <td class="text-center" v-html="item.name"></td>
                     <td class="text-center" v-html="item.title"></td>
                     <td class="text-center" v-html="item.duration"></td>
+                    <td class="text-center" v-html="item.status"></td>
                     <td class="text-center">
-                        <md-button class="md-just-icon md-simple md-primary">
+                        <md-button class="md-just-icon md-simple md-primary" @click="approveRequest(item.request_id)">
                           <md-icon>edit</md-icon>
-                          <md-tooltip md-direction="top">Chi tiết</md-tooltip>
+                          <md-tooltip md-direction="top">Phê duyệt</md-tooltip>
                         </md-button>
-                        <md-button class="md-just-icon md-simple md-danger">
+                        <md-button class="md-just-icon md-simple md-danger" @click="rejectRequest(item.request_id)">
                           <md-icon>close</md-icon>
-                          <md-tooltip md-direction="top">Xóa</md-tooltip>
+                          <md-tooltip md-direction="top">Từ chối</md-tooltip>
                         </md-button>
                     </td>
                   </tr>
@@ -58,6 +60,7 @@
           </md-card-content>
         </md-card>
       </div>
+      <v-dialog/>
     </div>
   </div>
 </template>
@@ -77,6 +80,66 @@
         });
         return rf.getRequest('UserOvertimeRequest').getUserOvertimeRequests(meta);
       },
+      approveRequest(requestId) {
+        this.$modal.show('dialog', {
+          title: 'Cảnh báo!',
+          text: 'Bạn có muốn phê duyệt yêu cầu này ?',
+          buttons: [
+            {
+              title: 'Bỏ qua',
+              handler: () => {
+                this.$modal.hide('dialog');
+              }
+            },
+            {
+              title: 'Xác nhận',
+              default: true,
+              handler: () => {
+                return rf.getRequest('UserOvertimeRequest').approveRequest({ id: requestId }).then(() => {
+                  this.$modal.hide('dialog');
+                  this.$refs.datatable.refresh();
+                  this.$toasted.show('Phê duyệt thành công!', {
+                    theme: 'bubble',
+                    position: 'bottom-right',
+                    duration : 1500,
+                    type: 'success'
+                  });
+                });
+              }
+            },
+          ]
+        });
+      },
+      rejectRequest(requestId) {
+        this.$modal.show('dialog', {
+          title: 'Cảnh báo!',
+          text: 'Bạn có muốn từ chối yêu cầu này ?',
+          buttons: [
+            {
+              title: 'Bỏ qua',
+              handler: () => {
+                this.$modal.hide('dialog');
+              }
+            },
+            {
+              title: 'Xác nhận',
+              default: true,
+              handler: () => {
+                return rf.getRequest('UserOvertimeRequest').rejectRequest({ id: requestId }).then(() => {
+                  this.$modal.hide('dialog');
+                  this.$refs.datatable.refresh();
+                  this.$toasted.show('Từ chối thành công!', {
+                    theme: 'bubble',
+                    position: 'bottom-right',
+                    duration : 1500,
+                    type: 'success'
+                  });
+                });
+              }
+            },
+          ]
+        });
+      }
     }
   }
 </script>

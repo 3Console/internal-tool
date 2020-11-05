@@ -19,4 +19,32 @@ class UserOvertimeController extends Controller
     {
         return $this->userOvertimeService->getUserOvertimeRequests($request->all());
     }
+
+    public function approveRequest(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $approveRequest = $this->userOvertimeService->approveRequest($request->all());
+            DB::commit();
+            return $approveRequest;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function rejectRequest(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $rejectRequest = $this->userOvertimeService->rejectRequest($request->all());
+            DB::commit();
+            return $rejectRequest;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
 }

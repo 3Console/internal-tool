@@ -72,6 +72,8 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
     Route::get('/overtime-requests', 'UserOvertimeController@getUserOvertimeRequests');
+    Route::post('overtime-requests/approve', 'UserOvertimeController@approveRequest');
+    Route::post('overtime-requests/reject', 'UserOvertimeController@rejectRequest');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user'], function () {
