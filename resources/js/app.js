@@ -38,6 +38,8 @@ import VueSwal from 'vue-swal'
 import Multiselect from 'vue-multiselect'
 import AnimatedVue from 'animated-vue'
 import 'animate.css/animate.css'
+import VueTabs from 'vue-nav-tabs'
+import 'vue-nav-tabs/themes/vue-tabs.css'
 
 Vue.use(AnimatedVue)
     // register globally
@@ -56,6 +58,7 @@ Vue.component('data-table', DataTable);
 Vue.component('vue-dropzone', vue2Dropzone)
 Vue.use(VueRouter)
 Vue.use(MaterialDashboard)
+Vue.use(VueTabs)
     // Vue.use(GlobalComponents)
     // Vue.use(GlobalDirectives)
     // Vue.use(Notifications)

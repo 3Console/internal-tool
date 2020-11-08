@@ -11,7 +11,8 @@ class UserOvertimeService
     {
         $limit = array_get($params, 'limit', 10);
         return UserOvertimeRequest::join('users', 'user_overtime_requests.user_id', 'users.id')
-        ->select('users.id', 'user_overtime_requests.id as request_id', 'users.name', 'user_overtime_requests.title', 'user_overtime_requests.duration', 'user_overtime_requests.status', 'user_overtime_requests.created_at')
+        ->where('user_overtime_requests.status', $params['status'])
+        ->select('users.id', 'user_overtime_requests.id as request_id', 'users.name', 'user_overtime_requests.title', 'user_overtime_requests.duration', 'user_overtime_requests.created_at')
         ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
             return $query->where('user_overtime_requests.title', 'like', "%$search%")
