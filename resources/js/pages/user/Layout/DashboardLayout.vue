@@ -2,7 +2,7 @@
 <a-layout id="components-layout-demo-fixed-sider">
     <side-bar></side-bar>
     <MobileSideBar :visible="menuVisible" />
-    <a-layout :style="{ marginLeft: '200px' }">
+    <a-layout :style="{ marginLeft: '200px', height: '100vh' }">
         <a-layout-header :style="{ background: '#fff', padding: 0 }">
             <div class="hamburger-icon" @click="menuVisible = !menuVisible">
                 <a-icon type="menu" class="menu-btn" style="display: none;" />
