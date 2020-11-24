@@ -4,6 +4,8 @@ namespace App\Http\Services;
 
 use App\User;
 use App\Models\UserOvertimeRequest;
+use App\Models\UserProject;
+use App\Models\Project;
 
 class UserOvertimeService
 {
@@ -34,5 +36,13 @@ class UserOvertimeService
         $userOvertime->status = 'rejected';
         $userOvertime->save();
         return $userOvertime;
+    }
+
+    public function getProjects($userId)
+    {
+        return UserProject::join('projects', 'user_projects.project_id', 'projects.id')
+                        ->where('user_projects.user_id', $userId)
+                        ->select('projects.id', 'projects.name')
+                        ->get();
     }
 }

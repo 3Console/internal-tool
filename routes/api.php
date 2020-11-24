@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => '/'], function () {
     Route::get('phrases', 'WordController@getAllPhrases');
 
     Route::post('/absence-create', 'UserAbsenceController@createAbsenceRequest');
+    Route::get('/projects', 'UserOvertimeController@getProjects');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {

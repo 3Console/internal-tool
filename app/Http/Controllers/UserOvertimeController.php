@@ -5,6 +5,7 @@ use App\Http\Services\UserOvertimeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class UserOvertimeController extends Controller
 {
@@ -46,5 +47,10 @@ class UserOvertimeController extends Controller
             Log::error($e->getMessage());
             throw $e;
         }
+    }
+
+    public function getProjects()
+    {
+        return $this->userOvertimeService->getProjects(Auth::id());
     }
 }
