@@ -17,9 +17,10 @@ class CreateUserAbsenceRequestsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('title');
+            $table->unsignedInteger('absence_type_id');
             $table->string('reason');
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('status')->default('pending');
             $table->timestamps();
         });

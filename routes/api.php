@@ -15,6 +15,8 @@ Route::get('send', 'NotificationController@sendNotification');
 Route::post('/image/store', 'ImageController@store');
 Route::get('/translate', 'TranslatorController@translate');
 
+Route::get('/absence-types', 'UserAbsenceController@getAbsenceTypes');
+
 Route::group(['middleware' => 'auth:api', 'prefix' => '/'], function () {
 
     Route::group(['prefix' => 'notification'], function () {
@@ -53,6 +55,8 @@ Route::group(['middleware' => 'auth:api', 'prefix' => '/'], function () {
 
     Route::get('random-word', 'WordController@getRandomWord');
     Route::get('phrases', 'WordController@getAllPhrases');
+
+    Route::post('/absence-create', 'UserAbsenceController@createAbsenceRequest');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {

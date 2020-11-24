@@ -5,6 +5,7 @@ use App\Http\Services\UserAbsenceService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class UserAbsenceController extends Controller
 {
@@ -46,5 +47,24 @@ class UserAbsenceController extends Controller
             Log::error($e->getMessage());
             throw $e;
         }
+    }
+
+    public function createAbsenceRequest(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $rejectRequest = $this->userAbsenceService->createAbsenceRequest(Auth::id() ,$request->all());
+            DB::commit();
+            return $rejectRequest;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function getAbsenceTypes()
+    {
+        return $this->userAbsenceService->getAbsenceTypes();
     }
 }

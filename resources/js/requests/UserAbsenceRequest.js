@@ -15,4 +15,14 @@ export default class UserAbsenceRequest extends BaseModelRequest {
         const url = '/admin/absence-requests/reject';
         return this.post(url, params);
     }
+
+    createAbsenceRequest(params) {
+        const url = '/absence-create';
+        return this.post(url, params);
+    }
+
+    getAbsenceTypes() {
+        const url = '/absence-types';
+        return this.get(url);
+    }
 }

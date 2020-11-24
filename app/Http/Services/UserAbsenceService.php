@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\User;
 use App\Models\UserAbsenceRequest;
+use App\Models\AbsenceType;
 
 class UserAbsenceService
 {
@@ -35,5 +36,24 @@ class UserAbsenceService
         $userAbsence->status = 'rejected';
         $userAbsence->save();
         return $userAbsence;
+    }
+
+    public function createAbsenceRequest($userId, $params)
+    {
+        $userAbsence = UserAbsenceRequest::create([
+            'user_id' => $userId,
+            'title' => $params['title'],
+            'absence_type_id' => $params['absence_type'],
+            'reason' => $params['content'],
+            'start_date' => $params['start_date'],
+            'end_date' => $params['end_date']
+        ]);
+
+        return $userAbsence;
+    }
+
+    public function getAbsenceTypes()
+    {
+        return AbsenceType::select('id', 'name')->get();
     }
 }
