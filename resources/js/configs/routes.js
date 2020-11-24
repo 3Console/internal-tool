@@ -18,6 +18,7 @@ import AboutMe from '@/pages/user/AboutMe.vue';
 import Game1 from '@/pages/user/game/Game1.vue';
 import Game3 from '@/pages/user/game/Game3.vue';
 import Schedule from '@/pages/user/Schedule.vue';
+import Absence from '@/pages/user/Absence.vue';
 
 
 export default {
@@ -95,6 +96,13 @@ export default {
                     path: 'schedule',
                     name: 'Schedule',
                     component: Schedule,
+                    meta: {
+                        requiresAuth: true
+                    }
+                }, {
+                    path: 'absence',
+                    name: 'Absence',
+                    component: Absence,
                     meta: {
                         requiresAuth: true
                     }

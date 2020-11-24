@@ -2,7 +2,7 @@
   <div>
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Trang chủ" />
     <div class="category inline-flex">
-      <a-card hoverable style="width: 300px; height: 285px">
+      <a-card hoverable style="width: 300px; height: 285px" @click="goToAbsence">
         <img
           slot="cover"
           alt="example"
@@ -27,38 +27,40 @@
 import rf from './../../requests/RequestFactory';
 import CategoryModel from '../../modals/Category';
 export default {
-    components: {
-        CategoryModel
+  components: {
+    CategoryModel
+  },
+  data() {
+    return {
+      categories: [],
+      params: {}
+    }
+  },
+  methods: {
+    getCategories(params) {
+        rf.getRequest('CategoryRequest').getCategories().then(res => {
+            this.categories = res;
+        })
     },
-    data() {
-        return {
-            categories: [],
-            params: {}
-        }
+    createCategory() {
+        this.$modal.show('category', { title: 'Thêm danh mục mới' });
     },
-    methods: {
-        getCategories(params) {
-            rf.getRequest('CategoryRequest').getCategories().then(res => {
-                this.categories = res;
-            })
-        },
-        createCategory() {
-            this.$modal.show('category', { title: 'Thêm danh mục mới' });
-        },
-        goToPhrase() {
-            this.$router.push({ name: 'Phrase' })
-        },
-        goToCategory(slug) {
-            this.$router.push(`/category/${slug}`);
-        },
-        refresh() {
-            this.getCategories();
-        }
+    goToPhrase() {
+        this.$router.push({ name: 'Phrase' })
     },
-    mounted() {
+    goToCategory(slug) {
+        this.$router.push(`/category/${slug}`);
+    },
+    goToAbsence() {
+      this.$router.push('/absence')
+    },
+    refresh() {
         this.getCategories();
     }
-
+  },
+  mounted() {
+      this.getCategories();
+  }
 }
 </script>
 

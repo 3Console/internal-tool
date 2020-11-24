@@ -127,5 +127,6 @@ class DatabaseSeeder extends Seeder
           "image" => "https://previews.123rf.com/images/capeman29/capeman292003/capeman29200300003/142420788-a-hot-potato-cartoon-character-screaming-while-burning-with-hot-fire.jpg"
         ]]);
 
+        $this->call(AbsenceTypesTableSeeder::class);
     }
 }
