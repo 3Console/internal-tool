@@ -17,8 +17,10 @@ class CreateUserOvertimeRequestsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('title');
+            $table->unsignedInteger('project_id');
             $table->string('reason');
-            $table->string('duration')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('status')->default('pending');
             $table->timestamps();
         });

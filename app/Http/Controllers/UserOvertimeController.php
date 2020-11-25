@@ -49,6 +49,20 @@ class UserOvertimeController extends Controller
         }
     }
 
+    public function createOvertimeRequest(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $overtimeRequest = $this->userOvertimeService->createOvertimeRequest(Auth::id() ,$request->all());
+            DB::commit();
+            return $overtimeRequest;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
+
     public function getProjects()
     {
         return $this->userOvertimeService->getProjects(Auth::id());

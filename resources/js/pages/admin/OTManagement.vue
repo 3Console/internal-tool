@@ -37,7 +37,7 @@
                   </th>
                   <th class="col_title_en">Tên đăng nhập</th>
                   <th class="col_title_jp">Tiêu đề</th>
-                  <th class="col_created_at">Thời gian OT</th>
+                  <th class="col_created_at">Created At</th>
                   <th class="col_tools">Công cụ</th>
                   <template slot="body" slot-scope="{ item }">
                     <tr>
@@ -46,7 +46,7 @@
                       </td>
                       <td class="text-center" v-html="item.name"></td>
                       <td class="text-center" v-html="item.title"></td>
-                      <td class="text-center" v-html="item.duration"></td>
+                      <td class="text-center" v-html="item.created_at"></td>
                       <td class="text-center">
                           <md-button class="md-just-icon md-simple md-primary" @click="approveRequest(item.request_id)">
                             <md-icon>edit</md-icon>
@@ -68,7 +68,7 @@
                   </th>
                   <th class="col_title_en">Tên đăng nhập</th>
                   <th class="col_title_jp">Tiêu đề</th>
-                  <th class="col_created_at">Thời gian OT</th>
+                  <th class="col_created_at">Created At</th>
                   <template slot="body" slot-scope="{ item }">
                     <tr>
                       <td class="text-center">
@@ -76,7 +76,7 @@
                       </td>
                       <td class="text-center" v-html="item.name"></td>
                       <td class="text-center" v-html="item.title"></td>
-                      <td class="text-center" v-html="item.duration"></td>
+                      <td class="text-center" v-html="item.created_at"></td>
                     </tr>
                   </template>
                 </data-table>
@@ -88,7 +88,7 @@
                   </th>
                   <th class="col_title_en">Tên đăng nhập</th>
                   <th class="col_title_jp">Tiêu đề</th>
-                  <th class="col_created_at">Thời gian OT</th>
+                  <th class="col_created_at">Created At</th>
                   <template slot="body" slot-scope="{ item }">
                     <tr>
                       <td class="text-center">
@@ -96,7 +96,7 @@
                       </td>
                       <td class="text-center" v-html="item.name"></td>
                       <td class="text-center" v-html="item.title"></td>
-                      <td class="text-center" v-html="item.duration"></td>
+                      <td class="text-center" v-html="item.created_at"></td>
                     </tr>
                   </template>
                 </data-table>

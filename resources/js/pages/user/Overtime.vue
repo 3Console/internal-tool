@@ -60,32 +60,32 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
-          // this.createAbsenceRequest(values);
+          // console.log(values)
+          this.createOvertimeRequest(values);
         }
       });
     },
     toCategory() {
       this.$router.push('/category')
     },
-    // createAbsenceRequest(params) {
-    //   return rf.getRequest('UserAbsenceRequest').createAbsenceRequest({
-    //     ...params,
-    //     start_date: moment(params.start_date).format('YYYY-MM-DD'),
-    //     end_date: moment(params.end_date).format('YYYY-MM-DD')
-    //   }).then(res => {
-    //     this.$notification.open({
-    //       message: 'Notification',
-    //       description: 'Create request successfully!',
-    //     })
-    //   })
-    //   .catch(err => {
-    //     this.$notification.open({
-    //       message: 'Warning',
-    //       description: `${err}`,
-    //     })
-    //   });
-    // },
+    createOvertimeRequest(params) {
+      return rf.getRequest('UserOvertimeRequest').createOvertimeRequest({
+        ...params,
+        start_date: moment(params.start_date).format('YYYY-MM-DD'),
+        end_date: moment(params.end_date).format('YYYY-MM-DD')
+      }).then(res => {
+        this.$notification.open({
+          message: 'Notification',
+          description: 'Create request successfully!',
+        })
+      })
+      .catch(err => {
+        this.$notification.open({
+          message: 'Warning',
+          description: `${err}`,
+        })
+      });
+    },
     getProjects() {
       return rf.getRequest('UserOvertimeRequest').getProjects().then(res => {
         this.projects = res;

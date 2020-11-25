@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => '/'], function () {
     Route::get('phrases', 'WordController@getAllPhrases');
 
     Route::post('/absence-create', 'UserAbsenceController@createAbsenceRequest');
+    Route::post('/overtime-create', 'UserOvertimeController@createOvertimeRequest');
     Route::get('/projects', 'UserOvertimeController@getProjects');
 });
 
