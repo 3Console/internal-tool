@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => '/'], function () {
     Route::post('/absence-create', 'UserAbsenceController@createAbsenceRequest');
     Route::post('/overtime-create', 'UserOvertimeController@createOvertimeRequest');
     Route::get('/projects', 'UserOvertimeController@getProjects');
+    Route::get('/profile', 'UserController@getProfile');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {

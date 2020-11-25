@@ -12,6 +12,10 @@
         <md-icon>content_paste</md-icon>
         <p>Nhân viên</p>
       </sidebar-link>
+      <sidebar-link to="/admin/project">
+        <md-icon>content_paste</md-icon>
+        <p>Project</p>
+      </sidebar-link>
       <sidebar-link to="/admin/absence">
         <md-icon>content_paste</md-icon>
         <p>Xét duyệt nghỉ phép</p>

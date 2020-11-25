@@ -7,6 +7,7 @@ import AdminEmployee from '@/pages/admin/Employee.vue';
 import AbsenceManagement from '@/pages/admin/AbsenceManagement.vue';
 import OTManagement from '@/pages/admin/OTManagement.vue';
 import SalaryManagement from '@/pages/admin/SalaryManagement.vue';
+import Project from '@/pages/admin/Project.vue';
 
 import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
 import WordList from '@/pages/user/WordList.vue';
@@ -157,6 +158,14 @@ export default {
                     path: 'salary',
                     name: 'Bảng lương tháng',
                     component: SalaryManagement,
+                    meta: {
+                        requiresAdmin: true
+                    }
+                },
+                {
+                    path: 'project',
+                    name: 'Project',
+                    component: Project,
                     meta: {
                         requiresAdmin: true
                     }

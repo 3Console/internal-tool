@@ -1,0 +1,74 @@
+<template>
+  <div class="content">
+    <div class="md-layout">
+      <div class="md-layout md-gutter">
+        <div class="md-layout-item md-size-5">
+        </div>
+        <div class="md-layout-item md-size-30">
+          <md-field >
+            <label>Tìm kiếm</label>
+            <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()"></md-input>
+            <md-icon>search</md-icon>
+          </md-field>
+        </div>
+        <div class="md-layout-item md-size-35">
+        </div>
+        <div class="md-layout-item">
+          <md-button  class="md-success">Thêm</md-button>
+          <md-button  class="md-info" @click="refresh">Làm mới</md-button>
+          <md-button  class="md-danger">Xóa</md-button>
+        </div>
+      </div>
+      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
+        <md-card>
+          <md-card-header data-background-color="green">
+            <h4 class="title">Project</h4>
+            <p class="category">Here is a subtitle for this table</p>
+          </md-card-header>
+          <md-card-content>
+            <data-table :get-data="getPendingRequest" ref="datatable">
+              <th class="col_checkbox">
+                <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
+              </th>
+              <th class="col_title_en">Project Name</th>
+              <th class="col_title_jp">Status</th>
+              <th class="col_created_at">Created At</th>
+              <th class="col_tools">Công cụ</th>
+              <template slot="body" slot-scope="{ item }">
+                <tr>
+                  <td class="text-center">
+                    <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
+                  </td>
+                  <td class="text-center" v-html="item.name"></td>
+                  <td class="text-center" v-html="item.status"></td>
+                  <td class="text-center" v-html="item.created_at"></td>
+                  <td class="text-center">
+                      <md-button class="md-just-icon md-simple md-primary" @click="approveRequest(item.request_id)">
+                        <md-icon>edit</md-icon>
+                        <md-tooltip md-direction="top">Phê duyệt</md-tooltip>
+                      </md-button>
+                      <md-button class="md-just-icon md-simple md-danger" @click="rejectRequest(item.request_id)">
+                        <md-icon>close</md-icon>
+                        <md-tooltip md-direction="top">Từ chối</md-tooltip>
+                      </md-button>
+                  </td>
+                </tr>
+              </template>
+            </data-table>
+          </md-card-content>
+        </md-card>
+      </div>
+      <v-dialog/>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  
+}
+</script>
+
+<style lang="scss">
+
+</style>

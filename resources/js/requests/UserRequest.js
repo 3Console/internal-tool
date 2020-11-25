@@ -59,4 +59,8 @@ export default class UserRequest extends BaseModelRequest {
     });
   }
 
+  getProfile() {
+    const url = '/profile';
+    return this.get(url);
+  }
 }
