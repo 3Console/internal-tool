@@ -15,4 +15,14 @@ export default class UserOvertimeRequest extends BaseModelRequest {
         const url = '/admin/overtime-requests/reject';
         return this.post(url, params);
     }
+
+    createOvertimeRequest(params) {
+        const url = '/overtime-create';
+        return this.post(url, params);
+    }
+
+    getProjects() {
+        const url = '/projects';
+        return this.get(url);
+    }
 }

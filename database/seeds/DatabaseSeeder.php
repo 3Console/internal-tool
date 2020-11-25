@@ -128,5 +128,8 @@ class DatabaseSeeder extends Seeder
         ]]);
 
         $this->call(AbsenceTypesTableSeeder::class);
+        $this->call(PositionsTableSeeder::class);
+        $this->call(ProjectsTableSeeder::class);
+        $this->call(UserProjectsTableSeeder::class);
     }
 }

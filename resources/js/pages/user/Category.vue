@@ -10,7 +10,7 @@
         />
         <a-card-meta title="Đăng ký nghỉ phép" description="This is the description" />
       </a-card>
-      <a-card hoverable style="width: 300px; height: 285px">
+      <a-card hoverable style="width: 300px; height: 285px" @click="goToOvertime">
         <img
           slot="cover"
           alt="example"
@@ -53,6 +53,9 @@ export default {
     },
     goToAbsence() {
       this.$router.push('/absence')
+    },
+    goToOvertime() {
+      this.$router.push('/overtime')
     },
     refresh() {
         this.getCategories();
