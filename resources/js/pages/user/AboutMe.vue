@@ -9,7 +9,8 @@
         <a-tabs type="card">
           <a-tab-pane key="1" tab="Profile">
             <div class="edit-field">
-              <a-button type="primary" @click="toggleEdit()"><a-icon type="edit" /> Edit profile</a-button>
+              <a-button type="primary" v-if="!isEdit" @click="toggleEdit()"><a-icon type="edit" /> Edit profile</a-button>
+              <a-button type="default" v-else @click="toggleEdit()"><a-icon type="close" /> Cancel</a-button>
             </div>
             <template v-if="!isEdit">
               <div class="description-content">
@@ -102,7 +103,20 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log(this.user);
+      return rf.getRequest('UserRequest').updateProfile(this.user)
+      .then(res => {
+        this.$notification.open({
+          message: 'Notification',
+          description: 'Update successfully!',
+        });
+        this.toggleEdit();
+      })
+      .catch(err => {
+        this.$notification.open({
+          message: 'Warning',
+          description: `${err}`,
+        })
+      });
     },
     getProfile() {
       return rf.getRequest('UserRequest').getProfile().then(res => {

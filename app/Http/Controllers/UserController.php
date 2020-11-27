@@ -20,4 +20,18 @@ class UserController extends Controller
     {
         return $this->userService->getProfile(Auth::id());
     }
+
+    public function updateProfile(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $userRequest = $this->userService->updateProfile(Auth::id(), $request->all());
+            DB::commit();
+            return $userRequest;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
 }
