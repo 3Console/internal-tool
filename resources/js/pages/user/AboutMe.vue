@@ -1,44 +1,192 @@
 <template>
-<div class="about-me">
-    <div class="portfoliocard">
-        <div class="coverphoto"></div>
-        <div class="profile_picture"></div>
-        <div class="left_col">
-            <div class="followers">
-                Tổng số từ
-                <div class="follow_count">18,541</div>
+  <div class="profile-page">
+    <div class="banner"></div>
+    <div class="avatar">
+      <a-avatar :size="128" icon="user" class="icon-avatar" />
+      <span class="username">{{ user.full_name }}</span>
+      <div class="tagname">@{{ user.name }}</div>
+      <div class="tab-menu">
+        <a-tabs type="card">
+          <a-tab-pane key="1" tab="Profile">
+            <div class="edit-field">
+              <a-button type="primary" v-if="!isEdit" @click="toggleEdit()"><a-icon type="edit" /> Edit profile</a-button>
+              <a-button type="default" v-else @click="toggleEdit()"><a-icon type="close" /> Cancel</a-button>
             </div>
-             <div class="followers">
-                 Level
-                <div class="follow_count">18</div>
-            </div>
-        </div>
-        <div class="right_col">
-            <h2 class="name">John Doe</h2>
-            <h3 class="location">San Francisco, CA</h3>
-            <ul class="contact_information">
-                <li class="work">CEO</li>
-                <li class="website"><a class="nostyle" href="#">www.apple.com</a></li>
-                <li class="mail">john.doe@apple.com</li>
-                <li class="phone">1-(732)-757-2923</li>
-                <li class="resume"><a href="#" class="nostyle">download resume</a></li>
-            </ul>
-        </div>
+            <template v-if="!isEdit">
+              <div class="description-content">
+                <div class="content-item">
+                  <a-row>
+                    <a-col :span="3">
+                      <a-icon type="mail" />
+                      <label>Email:</label>
+                    </a-col>
+                    <a-col :span="9">
+                      <span>{{ user.email }}</span>
+                    </a-col>
+                  </a-row>
+                </div>
+                <div class="content-item">
+                  <a-row>
+                    <a-col :span="3">
+                      <a-icon type="phone" />
+                      <label>Phone:</label>
+                    </a-col>
+                    <a-col :span="9">
+                      <span>{{ user.phone_number || 'N/A' }}</span>
+                    </a-col>
+                  </a-row>
+                </div>
+                <div class="content-item">
+                  <a-row>
+                    <a-col :span="3">
+                      <a-icon type="environment" />
+                      <label>Address:</label>
+                    </a-col>
+                    <a-col :span="9">
+                      <span>{{ user.address || 'N/A' }}</span>
+                    </a-col>
+                  </a-row>
+                </div>
+              </div>
+            </template>
+            <template v-else>
+              <div class="description-content">
+                <a-form>
+                  <a-form-item label="Email">
+                    <a-input
+                      v-model="user.email"
+                      style="width: 30%"
+                    />
+                  </a-form-item>
+                  <a-form-item label="Phone number">
+                    <a-input
+                      v-model="user.phone_number"
+                      style="width: 30%"
+                    />
+                  </a-form-item>
+                  <a-form-item label="Address">
+                    <a-input
+                      v-model="user.address"
+                      style="width: 30%"
+                    />
+                  </a-form-item>
+                  <!-- <a-form-item label="Content">
+                    <a-textarea :rows="4" v-decorator="['content']" style="width: 30%" />
+                  </a-form-item> -->
+                  <a-form-item>
+                    <a-button type="primary" @click="handleSubmit()">
+                      Submit
+                    </a-button>
+                  </a-form-item>
+                </a-form>
+              </div>
+            </template>
+          </a-tab-pane>
+          <a-tab-pane key="2" tab="Statistic">
+            Content of Tab Pane 2
+          </a-tab-pane>
+        </a-tabs>
+      </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
+import rf from '../../requests/RequestFactory';
 export default {
-
+  data() {
+    return {
+      user: {},
+      isEdit: false,
+      form: this.$form.createForm(this, { name: 'profile_form' }),
+    }
+  },
+  methods: {
+    handleSubmit() {
+      return rf.getRequest('UserRequest').updateProfile(this.user)
+      .then(res => {
+        this.$notification.open({
+          message: 'Notification',
+          description: 'Update successfully!',
+        });
+        this.toggleEdit();
+      })
+      .catch(err => {
+        this.$notification.open({
+          message: 'Warning',
+          description: `${err}`,
+        })
+      });
+    },
+    getProfile() {
+      return rf.getRequest('UserRequest').getProfile().then(res => {
+        this.user = res;
+      })
+    },
+    toggleEdit() {
+      this.isEdit = !this.isEdit;
+    }
+  },
+  created() {
+    this.getProfile();
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.about-me {
-    padding: 30px;
-    background-image: url('https://i.pinimg.com/originals/78/81/2f/78812fd262025d24e53452a1307bbb6d.png');
-}
+  .profile-page {
+    height: 100%;
+
+    .banner {
+      height: 200px;
+      background-image: url('https://i.pinimg.com/originals/78/81/2f/78812fd262025d24e53452a1307bbb6d.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .avatar {
+      padding: 24px 240px;
+      position: relative;
+      top: -60px;
+
+      .icon-avatar {
+        margin-top: 10px;
+      }
+
+      .username {
+        font-size: 36px;
+        font-weight: bold;
+        position: relative;
+        top: 15px;
+        left: 20px;
+      }
+
+      .tagname {
+        position: relative;
+        left: 155px;
+        top: -35px;
+      }
+
+      .tab-menu {
+        .edit-field {
+          margin-bottom: 10px;
+          text-align: right;
+        }
+
+        .description-content {
+          padding: 12px;
+          padding-bottom: 0;
+          border: 1px solid #d8d8d8;
+
+          .content-item {
+            margin-bottom: 20px;
+
+          }
+        }
+      }
+    }
+  }
 
 a.nostyle {
     color: inherit;

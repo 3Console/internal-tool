@@ -11,20 +11,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
-        DB::table('users')->insert([[
-          "name" => "admin",
-          "full_name" => "admin",
-          "email" => "admin@gmail.com",
-          "password" => bcrypt('123456'),
-          "role" => 2
-        ],[
-          "name" => "user1",
-          "full_name" => "User 1",
-          "email" => "user1@gmail.com",
-          "password" => bcrypt('123456'),
-          "role" => 1
-        ]]);
+        // DB::table('users')->truncate();
+        // DB::table('users')->insert([[
+        //   "name" => "admin",
+        //   "full_name" => "admin",
+        //   "email" => "admin@gmail.com",
+        //   "password" => bcrypt('123456'),
+        //   "role" => 2
+        // ],[
+        //   "name" => "user1",
+        //   "full_name" => "User 1",
+        //   "email" => "user1@gmail.com",
+        //   "password" => bcrypt('123456'),
+        //   "role" => 1
+        // ]]);
         DB::table('buckets')->truncate();
         DB::table('buckets')->insert([
           [
@@ -127,6 +127,7 @@ class DatabaseSeeder extends Seeder
           "image" => "https://previews.123rf.com/images/capeman29/capeman292003/capeman29200300003/142420788-a-hot-potato-cartoon-character-screaming-while-burning-with-hot-fire.jpg"
         ]]);
 
+        $this->call(UsersTableSeeder::class);
         $this->call(AbsenceTypesTableSeeder::class);
         $this->call(PositionsTableSeeder::class);
         $this->call(ProjectsTableSeeder::class);
