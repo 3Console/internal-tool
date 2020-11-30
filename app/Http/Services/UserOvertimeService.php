@@ -59,4 +59,14 @@ class UserOvertimeService
                         ->select('projects.id', 'projects.name')
                         ->get();
     }
+
+    public function getUserOvertimeDetail($overtimeId)
+    {
+        return UserOvertimeRequest::join('users', 'user_overtime_requests.user_id', 'users.id')
+                                ->join('projects', 'user_overtime_requests.project_id', 'projects.id')
+                                ->where('user_overtime_requests.id', $overtimeId)
+                                ->select('users.full_name', 'users.email', 'projects.name as project', 'user_overtime_requests.title',
+                                        'user_overtime_requests.reason', 'user_overtime_requests.start_date', 'user_overtime_requests.end_date')
+                                ->first();
+    }
 }

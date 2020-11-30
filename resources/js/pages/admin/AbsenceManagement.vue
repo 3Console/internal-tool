@@ -45,7 +45,7 @@
                         <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
                       </td>
                       <td class="text-center" v-html="item.name"></td>
-                      <td class="text-center" v-html="item.title"></td>
+                      <td class="text-center" v-html="item.title" @click="toAbsenceDetail(item.request_id)" style="cursor: pointer"></td>
                       <td class="text-center" v-html="item.created_at"></td>
                       <td class="text-center">
                           <md-button class="md-just-icon md-simple md-primary" @click="approveRequest(item.request_id)">
@@ -75,7 +75,7 @@
                         <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
                       </td>
                       <td class="text-center" v-html="item.name"></td>
-                      <td class="text-center" v-html="item.title"></td>
+                      <td class="text-center" v-html="item.title" @click="toAbsenceDetail(item.request_id)" style="cursor: pointer"></td>
                       <td class="text-center" v-html="item.created_at"></td>
                     </tr>
                   </template>
@@ -95,7 +95,7 @@
                         <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
                       </td>
                       <td class="text-center" v-html="item.name"></td>
-                      <td class="text-center" v-html="item.title"></td>
+                      <td class="text-center" v-html="item.title" @click="toAbsenceDetail(item.request_id)" style="cursor: pointer"></td>
                       <td class="text-center" v-html="item.created_at"></td>
                     </tr>
                   </template>
@@ -143,6 +143,9 @@
       });
     },
     methods: {
+      toAbsenceDetail(request_id) {
+        this.$router.push({ name: 'AbsenceManagementDetail', params: { id: request_id } });
+      },
       getPendingRequest (params) {
         const meta = Object.assign({}, params, {
           search: this.searchInput,
