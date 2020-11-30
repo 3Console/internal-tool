@@ -56,4 +56,14 @@ class UserAbsenceService
     {
         return AbsenceType::select('id', 'name')->get();
     }
+
+    public function getUserAbsenceDetail($absenceId)
+    {
+        return UserAbsenceRequest::join('users', 'user_absence_requests.user_id', 'users.id')
+                                ->join('absence_types', 'user_absence_requests.absence_type_id', 'absence_types.id')
+                                ->where('user_absence_requests.id', $absenceId)
+                                ->select('users.email', 'users.full_name', 'user_absence_requests.title', 'user_absence_requests.reason', 
+                                        'user_absence_requests.start_date','user_absence_requests.end_date', 'absence_types.name as absence_type')
+                                ->first();
+    }
 }

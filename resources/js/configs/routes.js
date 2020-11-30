@@ -5,7 +5,9 @@ import AdminDashboardLayout from '@/pages/admin/Layout/DashboardLayout.vue'
 import AdminDashboard from '@/pages/admin/Dashboard.vue';
 import AdminEmployee from '@/pages/admin/Employee.vue';
 import AbsenceManagement from '@/pages/admin/AbsenceManagement.vue';
+import AbsenceManagementDetail from '@/pages/admin/AbsenceManagementDetail.vue';
 import OTManagement from '@/pages/admin/OTManagement.vue';
+import OTManagementDetail from '@/pages/admin/OTManagementDetail.vue';
 import SalaryManagement from '@/pages/admin/SalaryManagement.vue';
 import Project from '@/pages/admin/Project.vue';
 
@@ -140,16 +142,32 @@ export default {
                 },
                 {
                     path: 'absence',
-                    name: 'Xét duyệt nghỉ phép',
+                    name: 'AbsenceManagement',
                     component: AbsenceManagement,
                     meta: {
                         requiresAdmin: true
                     }
                 },
                 {
+                    path: 'absence/:id',
+                    name: 'AbsenceManagementDetail',
+                    component: AbsenceManagementDetail,
+                    meta: {
+                        requiresAdmin: true
+                    }
+                },
+                {
                     path: 'overtime',
-                    name: 'Xét duyệt OT',
+                    name: 'OTManagement',
                     component: OTManagement,
+                    meta: {
+                        requiresAdmin: true
+                    }
+                },
+                {
+                    path: 'overtime/:id',
+                    name: 'OTManagementDetail',
+                    component: OTManagementDetail,
                     meta: {
                         requiresAdmin: true
                     }

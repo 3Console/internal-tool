@@ -6,6 +6,11 @@ export default class UserAbsenceRequest extends BaseModelRequest {
         return this.get(url, params);
     }
 
+    getUserAbsenceDetail(id) {
+        const url = `/admin/absence-requests/${id}`;
+        return this.get(url);
+    }
+
     approveRequest(params) {
         const url = '/admin/absence-requests/approve';
         return this.post(url, params);

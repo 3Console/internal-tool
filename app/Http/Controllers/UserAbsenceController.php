@@ -67,4 +67,17 @@ class UserAbsenceController extends Controller
     {
         return $this->userAbsenceService->getAbsenceTypes();
     }
+
+    public function getUserAbsenceDetail(Request $request)
+    {
+        try {
+            $absenceDetail = $this->userAbsenceService->getUserAbsenceDetail($request->id);
+            DB::commit();
+            return $absenceDetail;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
 }

@@ -74,12 +74,14 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
     Route::get('/absence-requests', 'UserAbsenceController@getUserAbsenceRequests');
+    Route::get('/absence-requests/{id}', 'UserAbsenceController@getUserAbsenceDetail');
     Route::post('absence-requests/approve', 'UserAbsenceController@approveRequest');
     Route::post('absence-requests/reject', 'UserAbsenceController@rejectRequest');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
     Route::get('/overtime-requests', 'UserOvertimeController@getUserOvertimeRequests');
+    Route::get('/overtime-requests/{id}', 'UserOvertimeController@getUserOvertimeDetail');
     Route::post('overtime-requests/approve', 'UserOvertimeController@approveRequest');
     Route::post('overtime-requests/reject', 'UserOvertimeController@rejectRequest');
 });

@@ -67,4 +67,17 @@ class UserOvertimeController extends Controller
     {
         return $this->userOvertimeService->getProjects(Auth::id());
     }
+
+    public function getUserOvertimeDetail(Request $request)
+    {
+        try {
+            $overtimeDetail = $this->userOvertimeService->getUserOvertimeDetail($request->id);
+            DB::commit();
+            return $overtimeDetail;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
 }

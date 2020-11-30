@@ -6,6 +6,11 @@ export default class UserOvertimeRequest extends BaseModelRequest {
         return this.get(url, params);
     }
 
+    getUserOvertimeDetail(id) {
+        const url = `/admin/overtime-requests/${id}`;
+        return this.get(url);
+    }
+
     approveRequest(params) {
         const url = '/admin/overtime-requests/approve';
         return this.post(url, params);
