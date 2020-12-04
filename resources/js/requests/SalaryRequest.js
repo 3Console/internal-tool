@@ -14,4 +14,8 @@ export default class SalaryRequest extends BaseModelRequest {
     const url = '/admin/approve-overtime';
     return this.get(url, params);
   }
+  submitPaySlip(params) {
+    const url = '/admin/pay-slip';
+    return this.post(url, params);
+  }
 }

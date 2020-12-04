@@ -192,7 +192,7 @@
         <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100" style="margin-top: 20px">
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-size-5"></div>
-            <md-button class="md-raised md-primary">Submit</md-button>
+            <md-button class="md-raised md-primary" @click="submitPaySlip">Submit</md-button>
             <md-button class="md-raised" style="margin-left: 10px" @click="toggleConfirmation">Cancel</md-button>
           </div>
         </div>
@@ -271,6 +271,21 @@ export default {
     },
     toggleConfirmation() {
       this.isConfirmation = !this.isConfirmation;
+    },
+    submitPaySlip() {
+      const meta = {
+        user_id: this.user_id,
+        start_date: moment(this.start_date).format('YYYY-MM-DD'),
+        end_date: moment(this.end_date).format('YYYY-MM-DD'),
+        working_hours: this.working_hours,
+        absence_hours: this.absence_hours,
+        overtime_hours: this.overtime_hours,
+        late_hours: this.late_hours,
+        support_amount: this.support_amount,
+        bonus_amount: this.bonus_amount,
+        violation_amount: this.violation_amount
+      }
+      return rf.getRequest('SalaryRequest').submitPaySlip(meta);
     }
   },
   created() {

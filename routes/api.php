@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::get('/employee', 'SalaryController@getEmployee');
     Route::get('/approve-absence', 'SalaryController@getUserAbsenceApprovedRequest');
     Route::get('/approve-overtime', 'SalaryController@getUserOvertimeApprovedRequest');
+    Route::post('/pay-slip', 'SalaryController@submitPaySlip');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user'], function () {

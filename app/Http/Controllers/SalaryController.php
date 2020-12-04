@@ -30,4 +30,18 @@ class SalaryController extends Controller
     {
         return $this->salaryService->getUserOvertimeApprovedRequest($request->all());
     }
+
+    public function submitPaySlip(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $paySlip = $this->salaryService->submitPaySlip($request->all());
+            DB::commit();
+            return $paySlip;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
 }
