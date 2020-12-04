@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import moment from 'moment';
 
 Vue.filter('capitalize', function (value) {
     if (!value) return ''
@@ -23,4 +24,8 @@ Vue.filter('formatPriorityToPercent', function (value) {
 
 Vue.filter('toIpa', function(value) {
     // return TextToIPA.lookup(value);
+});
+
+Vue.filter('dateFormat', function (date) {
+    return moment(date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
 });

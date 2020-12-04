@@ -7,7 +7,8 @@ import GameRequest from './GameRequest';
 import NotificationRequest from './NotificationRequest';
 import UserAbsenceRequest from './UserAbsenceRequest';
 import UserOvertimeRequest from './UserOvertimeRequest';
-
+import SalaryRequest from './SalaryRequest';
+ 
 const requestMap = {
     UserRequest,
     EmployeeRequest,
@@ -17,7 +18,8 @@ const requestMap = {
     GameRequest,
     NotificationRequest,
     UserAbsenceRequest,
-    UserOvertimeRequest
+    UserOvertimeRequest,
+    SalaryRequest
 };
 
 const instances = {};
