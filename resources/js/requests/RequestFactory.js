@@ -8,6 +8,7 @@ import NotificationRequest from './NotificationRequest';
 import UserAbsenceRequest from './UserAbsenceRequest';
 import UserOvertimeRequest from './UserOvertimeRequest';
 import SalaryRequest from './SalaryRequest';
+import ProjectRequest from './ProjectRequest';
  
 const requestMap = {
     UserRequest,
@@ -19,7 +20,8 @@ const requestMap = {
     NotificationRequest,
     UserAbsenceRequest,
     UserOvertimeRequest,
-    SalaryRequest
+    SalaryRequest,
+    ProjectRequest
 };
 
 const instances = {};

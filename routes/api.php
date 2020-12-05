@@ -93,6 +93,14 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::post('/pay-slip', 'SalaryController@submitPaySlip');
 });
 
+Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
+    Route::get('/projects', 'ProjectController@getProjects');
+    Route::get('project/{id}', 'ProjectController@getProject');
+    Route::post('/project/create', 'ProjectController@createProject');
+    Route::post('project/update/{id}', 'ProjectController@updateProject');
+    Route::post('project/delete/{id}', 'ProjectController@deleteProject');
+});
+
 Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user'], function () {
     Route::get('/info', function () {
         return "hihi";
