@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Http\Services;
+
+use App\User;
+use App\Models\Project;
+use App\Models\UserProject;
+use App\Models\Position;
+
+class ProjectService
+{
+    public function getProjects($params)
+    {
+        $limit = array_get($params, 'limit', 10);
+        return Project::join('user_projects', 'projects.id', 'user_projects.project_id')
+                    ->join('users', 'user_projects.user_id', 'users.id')
+                    ->join('positions', 'user_projects.position_id', 'positions.id')
+                    ->where('positions.name', 'Project manager')
+                    ->select('projects.id' ,'projects.name', 'projects.status', 'users.full_name')
+                    ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+                        $search = array_get($params, 'search');
+                        return $query->where('projects.name', 'like', "%$search%")
+                                    ->orWhere('projects.status', 'like', "%$search%")
+                                    ->orWhere('users.full_name', 'like', "%$search%");
+                        })->orderBy('projects.created_at', 'desc')
+                    ->paginate($limit);
+    }
+
+    public function getProject($projectId)
+    {
+        return Project::where('id', $projectId)
+                    ->select('id', 'name', 'status')
+                    ->first();
+    }
+
+    public function createProject($input)
+    {
+        $project = Project::create([
+            'name' => $input['project_name']
+        ]);
+
+        return $project;
+    }
+
+    public function updateProject($projectId, $input)
+    {
+        $project = Project::where('id', $projectId)->first();
+        $project->name = $input['project_name'];
+        $project->status = $input['status'];
+        $project->save();
+        return $project;
+    }
+
+    public function deleteProject($projectId)
+    {
+        $project = Project::where('id', $projectId)->first();
+        $project->delete();
+        return 'Delete successfully';
+    }
+}
