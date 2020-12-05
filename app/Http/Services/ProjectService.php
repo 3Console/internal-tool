@@ -57,4 +57,24 @@ class ProjectService
         $project->delete();
         return 'Delete successfully';
     }
+
+    public function getProjectMembers($projectId, $params)
+    {
+        $limit = array_get($params, 'limit', 10);
+        return UserProject::join('users', 'user_projects.user_id', 'users.id')
+                    ->join('positions', 'user_projects.position_id', 'positions.id')
+                    ->where('user_projects.project_id', $projectId)
+                    ->select('user_projects.id', 'users.full_name' ,'users.email', 'positions.name as position')
+                    ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+                        $search = array_get($params, 'search');
+                        return $query->where('users.full_name', 'like', "%$search%")
+                                    ->orWhere('users.email', 'like', "%$search%")
+                                    ->orWhere('positions.name', 'like', "%$search%");
+                        })->orderBy('user_projects.created_at', 'desc')
+                    ->paginate($limit);
+    }
+
+    public function getPositions() {
+        return Position::select('id', 'name')->get();
+    }
 }

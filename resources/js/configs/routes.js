@@ -10,6 +10,7 @@ import OTManagement from '@/pages/admin/OTManagement.vue';
 import OTManagementDetail from '@/pages/admin/OTManagementDetail.vue';
 import SalaryManagement from '@/pages/admin/SalaryManagement.vue';
 import Project from '@/pages/admin/Project.vue';
+import ProjectMember from '@/pages/admin/ProjectMember.vue';
 
 import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
 import WordList from '@/pages/user/WordList.vue';
@@ -184,6 +185,14 @@ export default {
                     path: 'project',
                     name: 'Project',
                     component: Project,
+                    meta: {
+                        requiresAdmin: true
+                    }
+                },
+                {
+                    path: 'project/:id',
+                    name: 'Project Member',
+                    component: ProjectMember,
                     meta: {
                         requiresAdmin: true
                     }

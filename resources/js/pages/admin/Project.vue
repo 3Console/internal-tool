@@ -39,7 +39,7 @@
                   <td class="text-center">
                     <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
                   </td>
-                  <td class="text-center" v-html="item.name"></td>
+                  <td class="text-center" v-html="item.name" @click="toProjectDetail(item.id)" style="cursor: pointer"></td>
                   <td class="text-center" v-html="item.full_name"></td>
                   <td class="text-center" v-html="item.status"></td>
                   <td class="text-center">
@@ -89,6 +89,9 @@ export default {
         search: this.searchInput,
       });
       return rf.getRequest('ProjectRequest').getProjects(meta);
+    },
+    toProjectDetail(projectId) {
+      this.$router.push({ name: 'Project Member', params: { id: projectId } });
     },
     createProject() {
       this.$modal.show('project', {title: 'Add project'});

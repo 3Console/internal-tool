@@ -99,6 +99,8 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::post('/project/create', 'ProjectController@createProject');
     Route::post('project/update/{id}', 'ProjectController@updateProject');
     Route::post('project/delete/{id}', 'ProjectController@deleteProject');
+    Route::get('project/{id}/members', 'ProjectController@getProjectMembers');
+    Route::get('/positions', 'ProjectController@getPositions');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user'], function () {
