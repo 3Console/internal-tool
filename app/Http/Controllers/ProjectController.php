@@ -77,4 +77,51 @@ class ProjectController extends Controller
     {
         return $this->projectService->getPositions();
     }
+
+    public function getMember(Request $request)
+    {
+        return $this->projectService->getMember($request->id);
+    }
+
+    public function addMember(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $project = $this->projectService->addMember($request->all());
+            DB::commit();
+            return $project;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function updateMember(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $project = $this->projectService->updateMember($request->id, $request->all());
+            DB::commit();
+            return $project;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function deleteMember(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $project = $this->projectService->deleteMember($request->id);
+            DB::commit();
+            return $project;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
 }

@@ -43,11 +43,11 @@
                   <td class="text-center" v-html="item.email"></td>
                   <td class="text-center" v-html="item.position"></td>
                   <td class="text-center">
-                      <md-button class="md-just-icon md-simple md-primary" @click="editProject(item.id)">
+                      <md-button class="md-just-icon md-simple md-primary" @click="editMember(item.id)">
                         <md-icon>edit</md-icon>
                         <md-tooltip md-direction="top">Edit</md-tooltip>
                       </md-button>
-                      <md-button class="md-just-icon md-simple md-danger" @click="deleteProject(item.id)">
+                      <md-button class="md-just-icon md-simple md-danger" @click="deleteMember(item.id)">
                         <md-icon>close</md-icon>
                         <md-tooltip md-direction="top">Delete</md-tooltip>
                       </md-button>
@@ -93,6 +93,39 @@ export default {
     },
     addMember() {
       this.$modal.show('member', {title: 'Add member'});
+    },
+    editMember(memberId) {
+      this.$modal.show('member', {title: 'Edit member', memberId: memberId});
+    },
+    deleteMember(memberId) {
+      this.$modal.show('dialog', {
+        title: 'Warning!',
+        text: 'Are you sure to delete this member ?',
+        buttons: [
+          {
+            title: 'Cancel',
+            handler: () => {
+              this.$modal.hide('dialog');
+            }
+          },
+          {
+            title: 'Confirm',
+            default: true,
+            handler: () => {
+              return rf.getRequest('ProjectRequest').deleteMember(memberId).then(() => {
+                this.$modal.hide('dialog');
+                this.$refs.datatable.refresh();
+                this.$toasted.show('Delete succesfully!', {
+                  theme: 'bubble',
+                  position: 'bottom-right',
+                  duration : 1500,
+                  type: 'success'
+                });
+              });
+            }
+          },
+        ]
+      });
     }
   }
 }

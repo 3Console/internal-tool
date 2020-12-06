@@ -32,17 +32,9 @@
           </div>
         </md-field> -->
         <md-field>
-          <md-select id="user"
-                     :name="`${_uid}_name`"
-                     data-vv-validate-on="none"
-                     data-vv-as="user_name"
-                     v-validate="'required'"
-                     data-vv-scope="general"
-                     placeholder="User"
-                     :class="errors.has(`general.${_uid}_name`) ? 'is-invalid' : ''"
-                     v-model="user_id">
+          <md-select id="user" name="user" placeholder="User" v-model="user_id">
             <template v-for="user in users">
-              <md-option :value="user.id" :key="user.id" style="z-index: 999">{{ user.full_name }}</md-option>
+              <md-option :value="user.id" :key="user.id">{{ user.full_name }}</md-option>
             </template>
           </md-select>
           <div v-if="errors.has(`general.${_uid}_name`)">
@@ -87,18 +79,26 @@ export default {
       users: [],
       positions: [],
       editingId: '',
+      project_id: this.$route.params.id,
+      user_id: null,
+      position: null
     }
   },
   methods: {
     beforeOpen (event) {
       this.title = event.params.title;
-      if(event.params.projectId) {
-        this.editingId = event.params.projectId;
-        rf.getRequest('ProjectRequest').getProject(this.editingId).then((project)=>{
-          this.project_name = project.name;
-          this.status= project.status;
+      if(event.params.memberId) {
+        this.editingId = event.params.memberId;
+        rf.getRequest('ProjectRequest').getMember(this.editingId).then((member)=>{
+          this.user_id = member.user_id;
+          this.position = member.position_id;
         });
       }
+    },
+    beforeClose() {
+      this.editingId = '';
+      this.user_id = null;
+      this.position = null;
     },
     getEmployee() {
       return rf.getRequest('SalaryRequest').getEmployee().then(res => {
@@ -118,12 +118,40 @@ export default {
           return;
         }
         if(this.editingId) {
-          this.updateProject();
+          this.updateMember();
         } else {
-          this.createProject();
+          this.addMember();
         }
       });
     },
+    addMember() {
+      rf.getRequest('ProjectRequest').addMember({user_id: this.user_id, project_id: this.project_id, position: this.position}).then((res)=>{
+        this.$modal.hide('member');
+        this.$emit('refresh');
+      }).catch((err) => {
+        // this.$toasted.show('Đã có lỗi xảy ra, vui lòng kiểm tra lại!', {
+        //   theme: 'bubble',
+        //   position: 'top-right',
+        //   duration : 1500,
+        //   type: 'danger'
+        // });
+      });
+    },
+    updateMember() {
+      rf.getRequest('ProjectRequest').updateMember(this.editingId, {user_id: this.user_id, position: this.position}).then((res)=> {
+        this.$modal.hide('member');
+        this.$emit('refresh');
+      });
+      this.$toasted.show('Cập nhật nhân viên thành công!', {
+        theme: 'bubble',
+        position: 'top-right',
+        duration : 1500,
+        type: 'success'
+      });
+    },
+    cancel() {
+      this.$modal.hide('member');
+    }
   },
   created() {
     this.getEmployee();

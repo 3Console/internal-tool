@@ -77,4 +77,37 @@ class ProjectService
     public function getPositions() {
         return Position::select('id', 'name')->get();
     }
+
+    public function getMember($memberId) {
+        return UserProject::where('id', $memberId)
+                        ->select('user_id', 'position_id')
+                        ->first();
+    }
+
+    public function addMember($input)
+    {
+        $member = UserProject::create([
+            'user_id' => $input['user_id'],
+            'project_id' => $input['project_id'],
+            'position_id' => $input['position']
+        ]);
+
+        return $member;
+    }
+
+    public function updateMember($memberId, $input)
+    {
+        $member = UserProject::where('id', $memberId)->first();
+        $member->user_id = $input['user_id'];
+        $member->position_id = $input['position'];
+        $member->save();
+        return $member;
+    }
+
+    public function deleteMember($memberId)
+    {
+        $member = UserProject::where('id', $memberId)->first();
+        $member->delete();
+        return 'Delete successfully';
+    }
 }

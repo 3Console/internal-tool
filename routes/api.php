@@ -101,6 +101,10 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::post('project/delete/{id}', 'ProjectController@deleteProject');
     Route::get('project/{id}/members', 'ProjectController@getProjectMembers');
     Route::get('/positions', 'ProjectController@getPositions');
+    Route::get('project/member/{id}', 'ProjectController@getMember');
+    Route::post('/project/member/create', 'ProjectController@addMember');
+    Route::post('project/member/update/{id}', 'ProjectController@updateMember');
+    Route::post('project/member/delete/{id}', 'ProjectController@deleteMember');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user'], function () {
