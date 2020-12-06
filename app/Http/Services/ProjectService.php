@@ -57,4 +57,57 @@ class ProjectService
         $project->delete();
         return 'Delete successfully';
     }
+
+    public function getProjectMembers($projectId, $params)
+    {
+        $limit = array_get($params, 'limit', 10);
+        return UserProject::join('users', 'user_projects.user_id', 'users.id')
+                    ->join('positions', 'user_projects.position_id', 'positions.id')
+                    ->where('user_projects.project_id', $projectId)
+                    ->select('user_projects.id', 'users.full_name' ,'users.email', 'positions.name as position')
+                    ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+                        $search = array_get($params, 'search');
+                        return $query->where('users.full_name', 'like', "%$search%")
+                                    ->orWhere('users.email', 'like', "%$search%")
+                                    ->orWhere('positions.name', 'like', "%$search%");
+                        })->orderBy('user_projects.created_at', 'desc')
+                    ->paginate($limit);
+    }
+
+    public function getPositions() {
+        return Position::select('id', 'name')->get();
+    }
+
+    public function getMember($memberId) {
+        return UserProject::where('id', $memberId)
+                        ->select('user_id', 'position_id')
+                        ->first();
+    }
+
+    public function addMember($input)
+    {
+        $member = UserProject::create([
+            'user_id' => $input['user_id'],
+            'project_id' => $input['project_id'],
+            'position_id' => $input['position']
+        ]);
+
+        return $member;
+    }
+
+    public function updateMember($memberId, $input)
+    {
+        $member = UserProject::where('id', $memberId)->first();
+        $member->user_id = $input['user_id'];
+        $member->position_id = $input['position'];
+        $member->save();
+        return $member;
+    }
+
+    public function deleteMember($memberId)
+    {
+        $member = UserProject::where('id', $memberId)->first();
+        $member->delete();
+        return 'Delete successfully';
+    }
 }

@@ -30,9 +30,9 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $student = $this->projectService->createProject($request->all());
+            $project = $this->projectService->createProject($request->all());
             DB::commit();
-            return $student;
+            return $project;
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
@@ -44,9 +44,9 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $student = $this->projectService->updateProject($request->id, $request->all());
+            $project = $this->projectService->updateProject($request->id, $request->all());
             DB::commit();
-            return $student;
+            return $project;
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
@@ -58,9 +58,66 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $student = $this->projectService->deleteProject($request->id);
+            $project = $this->projectService->deleteProject($request->id);
             DB::commit();
-            return $student;
+            return $project;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function getProjectMembers(Request $request)
+    {
+        return $this->projectService->getProjectMembers($request->id, $request->all());
+    }
+
+    public function getPositions()
+    {
+        return $this->projectService->getPositions();
+    }
+
+    public function getMember(Request $request)
+    {
+        return $this->projectService->getMember($request->id);
+    }
+
+    public function addMember(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $project = $this->projectService->addMember($request->all());
+            DB::commit();
+            return $project;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function updateMember(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $project = $this->projectService->updateMember($request->id, $request->all());
+            DB::commit();
+            return $project;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function deleteMember(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $project = $this->projectService->deleteMember($request->id);
+            DB::commit();
+            return $project;
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
