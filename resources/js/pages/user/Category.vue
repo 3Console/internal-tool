@@ -52,7 +52,7 @@
       <a-row class="row-item">
         <a-col :span="5"></a-col>
         <a-col :span="7" class="card-left">
-          <a-card hoverable style="width: 100%" @click="goToAbsence">
+          <a-card hoverable style="width: 100%" @click="goToPaySlip">
             <img
               slot="cover"
               alt="example"
@@ -108,6 +108,9 @@ export default {
     },
     goToOvertime() {
       this.$router.push('/overtime')
+    },
+    goToPaySlip() {
+      this.$router.push('/payslip')
     },
     refresh() {
         this.getCategories();

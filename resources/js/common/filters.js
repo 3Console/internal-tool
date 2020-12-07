@@ -29,3 +29,7 @@ Vue.filter('toIpa', function(value) {
 Vue.filter('dateFormat', function (date) {
     return moment(date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
 });
+
+Vue.filter('fromNow', function (date) {
+    return moment(date, 'YYYY-MM-DD HH:mm:ss').fromNow();
+});

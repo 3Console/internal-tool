@@ -44,4 +44,14 @@ class SalaryController extends Controller
             throw $e;
         }
     }
+
+    public function getPaySlips()
+    {
+        return $this->salaryService->getPaySlips(Auth::id());
+    }
+
+    public function getPaySlipDetail(Request $request)
+    {
+        return $this->salaryService->getPaySlipDetail($request->id);
+    }
 }

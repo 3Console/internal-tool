@@ -1,6 +1,5 @@
 import BaseModelRequest from './BaseModelRequest';
 
-
 export default class SalaryRequest extends BaseModelRequest {
   getEmployee() {
     const url = '/admin/employee';
@@ -17,5 +16,13 @@ export default class SalaryRequest extends BaseModelRequest {
   submitPaySlip(params) {
     const url = '/admin/pay-slip';
     return this.post(url, params);
+  }
+  getPaySlips() {
+    const url = '/pay-slips';
+    return this.get(url);
+  }
+  getPaySlipDetail(id) {
+    const url = `/pay-slip/${id}`;
+    return this.get(url);
   }
 }

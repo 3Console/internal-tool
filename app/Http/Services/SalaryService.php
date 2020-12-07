@@ -51,4 +51,20 @@ class SalaryService
 
         return $paySlip;
     }
+
+    public function getPaySlips($userId)
+    {
+        return PaySlip::where('user_id', $userId)
+                    ->select('*')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+    }
+
+    public function getPaySlipDetail($slipId)
+    {
+        return PaySlip::join('users', 'pay_slips.user_id', 'users.id')
+                    ->where('pay_slips.id', $slipId)
+                    ->select('users.full_name', 'users.email', 'users.address', 'pay_slips.*')
+                    ->first();
+    }
 }

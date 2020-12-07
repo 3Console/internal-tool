@@ -24,6 +24,8 @@ import Game3 from '@/pages/user/game/Game3.vue';
 import Schedule from '@/pages/user/Schedule.vue';
 import Absence from '@/pages/user/Absence.vue';
 import Overtime from '@/pages/user/Overtime.vue';
+import PaySlip from '@/pages/user/PaySlip.vue';
+import PaySlipDetail from '@/pages/user/PaySlipDetail';
 
 
 export default {
@@ -115,6 +117,20 @@ export default {
                     path: 'overtime',
                     name: 'Overtime',
                     component: Overtime,
+                    meta: {
+                        requiresAuth: true
+                    }
+                }, {
+                    path: 'payslip',
+                    name: 'PaySlip',
+                    component: PaySlip,
+                    meta: {
+                        requiresAuth: true
+                    }
+                }, {
+                    path: 'payslip/:id',
+                    name: 'PaySlipDetail',
+                    component: PaySlipDetail,
                     meta: {
                         requiresAuth: true
                     }
