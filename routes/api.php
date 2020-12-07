@@ -61,6 +61,8 @@ Route::group(['middleware' => 'auth:api', 'prefix' => '/'], function () {
     Route::get('/projects', 'UserOvertimeController@getProjects');
     Route::get('/profile', 'UserController@getProfile');
     Route::post('/profile-update', 'UserController@updateProfile');
+    Route::get('/pay-slips', 'SalaryController@getPaySlips');
+    Route::get('/pay-slip/{id}', 'SalaryController@getPaySlipDetail');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
