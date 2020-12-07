@@ -3,7 +3,7 @@
     <side-bar></side-bar>
     <MobileSideBar :visible="menuVisible" />
     <a-layout :style="{ marginLeft: '200px', height: '100vh' }">
-        <a-layout-header :style="{ background: '#fff', padding: 0 }">
+        <a-layout-header>
             <div class="hamburger-icon" @click="menuVisible = !menuVisible">
                 <a-icon type="menu" class="menu-btn" style="display: none;" />
             </div>
@@ -14,8 +14,8 @@
                 <a-icon type="logout" class="logout-btn" @click="logout()" />
             </a-tooltip>
         </a-layout-header>
-        <a-layout-content :style="{ margin: '24px 16px 0', overflow: 'initial' }">
-            <div class="dashboard-content" :style="{ padding: '24px', background: '#fff', textAlign: 'left' }">
+        <a-layout-content :style="{ marginTop: '24px', overflow: 'initial' }">
+            <div class="dashboard-content" :style="{ marginTop: '40px', padding: '24px', textAlign: 'left' }">
 
                 <dashboard-content> </dashboard-content>
 
@@ -58,7 +58,14 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.ant-layout-header {
+    position: fixed;
+    width: 90%;
+    z-index: 999;
+    background: #fff !important;
+    padding: 0 !important;
+}
 @media screen and (max-width: 600px) {
     .v--modal-box {
         height: 100vh !important;

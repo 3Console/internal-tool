@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-left: 16px">
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="Absence" @back="toCategory" />
     <div class="form-field">
       <a-form :form="form" @submit="handleSubmit">

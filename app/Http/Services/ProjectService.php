@@ -70,7 +70,7 @@ class ProjectService
                         return $query->where('users.full_name', 'like', "%$search%")
                                     ->orWhere('users.email', 'like', "%$search%")
                                     ->orWhere('positions.name', 'like', "%$search%");
-                        })->orderBy('user_projects.created_at', 'desc')
+                        })->orderBy('user_projects.position_id', 'asc')
                     ->paginate($limit);
     }
 
