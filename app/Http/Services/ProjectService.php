@@ -110,4 +110,30 @@ class ProjectService
         $member->delete();
         return 'Delete successfully';
     }
+
+    public function getUserProjects($userId)
+    {
+        return UserProject::join('projects', 'user_projects.project_id', 'projects.id')
+                        ->where('user_projects.user_id', $userId)
+                        ->select('user_projects.id', 'user_projects.project_id', 'projects.name')
+                        ->get();
+    }
+
+    public function getProjectManager($projectId)
+    {
+        return UserProject::join('users', 'user_projects.user_id', 'users.id')
+                        ->where('user_projects.project_id', $projectId)
+                        ->where('user_projects.position_id', 1)
+                        ->select('users.full_name', 'users.email')
+                        ->first();
+    }
+
+    public function getOtherMembers($projectId)
+    {
+        return UserProject::join('users', 'user_projects.user_id', 'users.id')
+                        ->where('user_projects.project_id', $projectId)
+                        ->where('user_projects.position_id', '!=', 1)
+                        ->select('users.full_name', 'users.email')
+                        ->get();
+    }
 }

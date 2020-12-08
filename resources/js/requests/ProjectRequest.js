@@ -45,4 +45,16 @@ export default class ProjectRequest extends BaseModelRequest {
     const url = `/admin/project/member/delete/${memberId}`;
     return this.post(url);
   }
+  getUserProjects() {
+    const url = '/my-projects';
+    return this.get(url);
+  }
+  getProjectManager(id) {
+    const url = `/my-projects/${id}/manager`;
+    return this.get(url);
+  }
+  getProjectMembers(id) {
+    const url = `/my-projects/${id}/members`;
+    return this.get(url);
+  }
 }
