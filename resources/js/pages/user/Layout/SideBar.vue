@@ -29,7 +29,7 @@ export default {
         },
         {
           key: 2,
-          routerName: 'AboutMe'
+          routerName: 'Notification'
         },
         {
           key: 3,

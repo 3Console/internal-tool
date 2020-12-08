@@ -67,7 +67,7 @@ export default {
       })
     },
     getProjectMembers() {
-      return rf.getRequest('ProjectRequest').getProjectMembers(this.project_id).then(res => {
+      return rf.getRequest('ProjectRequest').getOtherMembers(this.project_id).then(res => {
         this.members = res;
       })
     }
@@ -79,7 +79,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .row-item {
     margin-top: 20px;
     border-top: 1px solid #d8d8d8;

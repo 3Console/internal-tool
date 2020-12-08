@@ -28,6 +28,7 @@ import PaySlip from '@/pages/user/PaySlip.vue';
 import PaySlipDetail from '@/pages/user/PaySlipDetail';
 import MyProject from '@/pages/user/MyProject';
 import MyProjectDetail from '@/pages/user/MyProjectDetail';
+import Notification from '@/pages/user/Notification';
 
 
 export default {
@@ -147,6 +148,13 @@ export default {
                     path: 'project/:id',
                     name: 'MyProjectDetail',
                     component: MyProjectDetail,
+                    meta: {
+                        requiresAuth: true
+                    }
+                }, {
+                    path: 'notifications',
+                    name: 'Notification',
+                    component: Notification,
                     meta: {
                         requiresAuth: true
                     }

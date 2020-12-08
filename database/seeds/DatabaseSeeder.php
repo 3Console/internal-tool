@@ -132,5 +132,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PositionsTableSeeder::class);
         $this->call(ProjectsTableSeeder::class);
         $this->call(UserProjectsTableSeeder::class);
+        $this->call(NotificationsTableSeeder::class);
     }
 }
