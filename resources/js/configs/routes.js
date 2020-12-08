@@ -26,6 +26,8 @@ import Absence from '@/pages/user/Absence.vue';
 import Overtime from '@/pages/user/Overtime.vue';
 import PaySlip from '@/pages/user/PaySlip.vue';
 import PaySlipDetail from '@/pages/user/PaySlipDetail';
+import MyProject from '@/pages/user/MyProject';
+import MyProjectDetail from '@/pages/user/MyProjectDetail';
 
 
 export default {
@@ -131,6 +133,20 @@ export default {
                     path: 'payslip/:id',
                     name: 'PaySlipDetail',
                     component: PaySlipDetail,
+                    meta: {
+                        requiresAuth: true
+                    }
+                }, {
+                    path: 'project',
+                    name: 'MyProject',
+                    component: MyProject,
+                    meta: {
+                        requiresAuth: true
+                    }
+                }, {
+                    path: 'project/:id',
+                    name: 'MyProjectDetail',
+                    component: MyProjectDetail,
                     meta: {
                         requiresAuth: true
                     }

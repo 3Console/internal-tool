@@ -63,7 +63,7 @@
           </a-card>
         </a-col>
         <a-col :span="7">
-          <a-card hoverable style="width: 100%" @click="goToOvertime">
+          <a-card hoverable style="width: 100%" @click="goToMyProject">
             <img
               slot="cover"
               alt="example"
@@ -111,6 +111,9 @@ export default {
     },
     goToPaySlip() {
       this.$router.push('/payslip')
+    },
+    goToMyProject() {
+      this.$router.push('/project')
     },
     refresh() {
         this.getCategories();

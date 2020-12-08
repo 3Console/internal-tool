@@ -124,4 +124,19 @@ class ProjectController extends Controller
             throw $e;
         }
     }
+
+    public function getUserProjects()
+    {
+        return $this->projectService->getUserProjects(Auth::id());
+    }
+
+    public function getProjectManager(Request $request)
+    {
+        return $this->projectService->getProjectManager($request->id);
+    }
+
+    public function getOtherMembers(Request $request)
+    {
+        return $this->projectService->getOtherMembers($request->id);
+    }
 }
