@@ -1,23 +1,30 @@
 <template>
   <div style="margin: 0px 16px">
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="My Project" @back="toCategory" />
-    <div style="padding: 36px 24px">
-      <a-row>
-        <template v-for="project in projects">
-          <a-col :span="8" :key="project.id" style="margin-bottom: 20px; padding: 0 16px;">
-            <a-card hoverable style="width: 100%" @click="toMyProjectDetail(project.project_id)">
-              <img
-                slot="cover"
-                alt="example"
-                src="/images/project.png"
-                style="height: 200px"
-              />
-              <a-card-meta :title="project.name" description="This is the description" />
-            </a-card>
-          </a-col>
-        </template>
-      </a-row>
-    </div>
+    <template v-if="projects.length > 0">
+      <div style="padding: 36px 24px">
+        <a-row>
+          <template v-for="project in projects">
+            <a-col :span="8" :key="project.id" style="margin-bottom: 20px; padding: 0 16px;">
+              <a-card hoverable style="width: 100%" @click="toMyProjectDetail(project.project_id)">
+                <img
+                  slot="cover"
+                  alt="example"
+                  src="/images/project.png"
+                  style="height: 200px"
+                />
+                <a-card-meta :title="project.name" description="This is the description" />
+              </a-card>
+            </a-col>
+          </template>
+        </a-row>
+      </div>
+    </template>
+    <template v-else>
+      <div class="message">
+        You haven't joined a project yet 
+      </div>
+    </template>
   </div>
 </template>
 
@@ -48,6 +55,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  .message {
+    padding: 24px 16px;
+    font-size: 24px;
+    color: #476282;
+  }
 </style>

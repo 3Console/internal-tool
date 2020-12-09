@@ -23,4 +23,18 @@ class NotificationService
                             ->orderBy('created_at', 'desc')
                             ->get();
     }
+
+    public function getNotificationDetail($notificationId)
+    {
+        return Notification::where('id', $notificationId)
+                            ->select('*')
+                            ->first();
+    }
+
+    public function deleteNotification($notificationId)
+    {
+        $notification = Notification::where('id', $notificationId)->first();
+        $notification->delete();
+        return 'Delete successfully';
+    }
 }

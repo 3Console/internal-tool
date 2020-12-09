@@ -167,7 +167,7 @@ export default {
             redirect: '/admin/dashboard',
             children: [{
                     path: 'dashboard',
-                    name: 'Trang chủ',
+                    name: 'Dashboard',
                     component: AdminDashboard,
                     meta: {
                         requiresAdmin: true
@@ -175,7 +175,7 @@ export default {
                 },
                 {
                     path: 'employee',
-                    name: 'Nhân viên',
+                    name: 'Employee',
                     component: AdminEmployee,
                     meta: {
                         requiresAdmin: true
@@ -183,7 +183,7 @@ export default {
                 },
                 {
                     path: 'absence',
-                    name: 'AbsenceManagement',
+                    name: 'Absence Management',
                     component: AbsenceManagement,
                     meta: {
                         requiresAdmin: true
@@ -191,7 +191,7 @@ export default {
                 },
                 {
                     path: 'absence/:id',
-                    name: 'AbsenceManagementDetail',
+                    name: 'Absence Management Detail',
                     component: AbsenceManagementDetail,
                     meta: {
                         requiresAdmin: true
@@ -199,7 +199,7 @@ export default {
                 },
                 {
                     path: 'overtime',
-                    name: 'OTManagement',
+                    name: 'Overtime Management',
                     component: OTManagement,
                     meta: {
                         requiresAdmin: true
@@ -207,7 +207,7 @@ export default {
                 },
                 {
                     path: 'overtime/:id',
-                    name: 'OTManagementDetail',
+                    name: 'Overtime Management Detail',
                     component: OTManagementDetail,
                     meta: {
                         requiresAdmin: true
@@ -215,7 +215,7 @@ export default {
                 },
                 {
                     path: 'salary',
-                    name: 'Bảng lương tháng',
+                    name: 'Pay Slip',
                     component: SalaryManagement,
                     meta: {
                         requiresAdmin: true

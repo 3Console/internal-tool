@@ -6,23 +6,16 @@
         </div>
         <div class="md-layout-item md-size-30">
           <md-field >
-            <label>Tìm kiếm</label>
+            <label>Search</label>
             <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()"></md-input>
             <md-icon>search</md-icon>
           </md-field>
-        </div>
-        <div class="md-layout-item md-size-35">
-        </div>
-        <div class="md-layout-item">
-          <md-button  class="md-success">Thêm</md-button>
-          <md-button  class="md-info" @click="refresh">Làm mới</md-button>
-          <md-button  class="md-danger">Xóa</md-button>
         </div>
       </div>
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">Danh sách xin nghỉ phép</h4>
+            <h4 class="title">Absence Requests</h4>
             <p class="category">Here is a subtitle for this table</p>
           </md-card-header>
           <md-card-content>
@@ -30,15 +23,15 @@
               active-tab-color="#4caf50" 
               active-text-color="#fff"
             >
-              <v-tab title="Đang chờ xét duyệt">
+              <v-tab title="Pending">
                 <data-table :get-data="getPendingRequest" ref="datatable">
                   <th class="col_checkbox">
                     <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
                   </th>
-                  <th class="col_title_en">Tên đăng nhập</th>
-                  <th class="col_title_jp">Tiêu đề</th>
-                  <th class="col_created_at">Ngày tạo</th>
-                  <th class="col_tools">Công cụ</th>
+                  <th class="col_title_en">Username</th>
+                  <th class="col_title_jp">Title</th>
+                  <th class="col_created_at">Created At</th>
+                  <th class="col_tools">Action</th>
                   <template slot="body" slot-scope="{ item }">
                     <tr>
                       <td class="text-center">
@@ -50,25 +43,25 @@
                       <td class="text-center">
                           <md-button class="md-just-icon md-simple md-primary" @click="approveRequest(item.request_id)">
                             <md-icon>edit</md-icon>
-                            <md-tooltip md-direction="top">Phê duyệt</md-tooltip>
+                            <md-tooltip md-direction="top">Approve</md-tooltip>
                           </md-button>
                           <md-button class="md-just-icon md-simple md-danger" @click="rejectRequest(item.request_id)">
                             <md-icon>close</md-icon>
-                            <md-tooltip md-direction="top">Từ chối</md-tooltip>
+                            <md-tooltip md-direction="top">Reject</md-tooltip>
                           </md-button>
                       </td>
                     </tr>
                   </template>
                 </data-table>
               </v-tab>
-               <v-tab title="Đã phê duyệt">
+               <v-tab title="Approved">
                  <data-table :get-data="getApprovedRequest">
                   <th class="col_checkbox">
                     <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
                   </th>
-                  <th class="col_title_en">Tên đăng nhập</th>
-                  <th class="col_title_jp">Tiêu đề</th>
-                  <th class="col_created_at">Ngày tạo</th>
+                  <th class="col_title_en">Username</th>
+                  <th class="col_title_jp">Title</th>
+                  <th class="col_created_at">Created At</th>
                   <template slot="body" slot-scope="{ item }">
                     <tr>
                       <td class="text-center">
@@ -81,14 +74,14 @@
                   </template>
                 </data-table>
               </v-tab>
-               <v-tab title="Đã từ chối">
+               <v-tab title="Rejected">
                  <data-table :get-data="getRejectedRequest">
                   <th class="col_checkbox">
                     <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
                   </th>
-                  <th class="col_title_en">Tên đăng nhập</th>
-                  <th class="col_title_jp">Tiêu đề</th>
-                  <th class="col_created_at">Ngày tạo</th>
+                  <th class="col_title_en">Username</th>
+                  <th class="col_title_jp">Title</th>
+                  <th class="col_created_at">Created At</th>
                   <template slot="body" slot-scope="{ item }">
                     <tr>
                       <td class="text-center">
@@ -144,7 +137,7 @@
     },
     methods: {
       toAbsenceDetail(request_id) {
-        this.$router.push({ name: 'AbsenceManagementDetail', params: { id: request_id } });
+        this.$router.push({ name: 'Absence Management Detail', params: { id: request_id } });
       },
       getPendingRequest (params) {
         const meta = Object.assign({}, params, {

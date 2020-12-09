@@ -9,21 +9,21 @@
 
         <div class="form">
             <md-field>
-                <label>Tên đăng nhập</label>
+                <label>Username</label>
                 <md-input type="text" :name="`${_uid}_name`" data-vv-validate-on="none" data-vv-as="name" v-validate="'required|max:30'" data-vv-scope="general" v-model="name" @keyup.enter="submit" autofocus></md-input>
 
             </md-field>
             <div v-if="errors.has(`general.${_uid}_name`)">
                 <md-icon class="md-accent">warning</md-icon>
-                Tên đăng nhập là bắt buộc
+                This field is required
             </div>
             <md-field md-has-password>
-                <label>Mật khẩu</label>
+                <label>Password</label>
                 <md-input v-model="password" type="password" :name="`${_uid}_password`" data-vv-validate-on="none" data-vv-as="password" v-validate="'required|max:30'" data-vv-scope="general" @keyup.enter="submit"></md-input>
             </md-field>
             <div v-if="errors.has(`general.${_uid}_password`)">
                 <md-icon class="md-accent">warning</md-icon>
-                Mật khẩu là bắt buộc
+                This field is required
             </div>
         </div>
 
@@ -32,7 +32,7 @@
         </div>
 
         <div class="actions md-layout md-alignment-center">
-            <a-button type="primary" size="large" @click="submit" style="width: 100%">Đăng nhập</a-button>
+            <a-button type="primary" size="large" @click="submit" style="width: 100%">Login</a-button>
         </div>
 
         <div class="loading-overlay" v-if="loading">

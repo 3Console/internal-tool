@@ -16,7 +16,7 @@
           <span class="md-title">{{title}}</span>
 
           <md-field>
-            <label>Họ và tên</label>
+            <label>Full Name</label>
             <md-input type="text"
                       :name="`${_uid}_name`"
                       data-vv-validate-on="none"
@@ -34,7 +34,7 @@
           </md-field>
 
           <md-field>
-            <label>Tài khoản</label>
+            <label>Username</label>
             <md-input type="text"
                       :name="`${_uid}_username`"
                       data-vv-validate-on="none"
@@ -71,7 +71,7 @@
           <md-checkbox v-if="editingId" v-model="isEditPassword">Edit Password</md-checkbox>
           <div style="red-outline">
             <md-field>
-              <label>Mật khẩu</label>
+              <label>Password</label>
               <md-input type="password"
                         :name="`${_uid}_password`"
                         data-vv-validate-on="none"
@@ -90,7 +90,7 @@
             </md-field>
 
             <md-field :md-toggle-password="false">
-              <label>Nhập lại mật khẩu</label>
+              <label>Confirm password</label>
               <md-input type="password"
                         :name="`${_uid}_repassword`"
                         data-vv-validate-on="none"
@@ -110,8 +110,8 @@
       </div>
 
       <div class="md-right">
-        <md-button class="md-raised md-primary" @click="submit">Gửi</md-button>
-        <md-button class="md-raised md-accent" @click="cancel">Bỏ qua</md-button>
+        <md-button class="md-raised md-primary" @click="submit">Submit</md-button>
+        <md-button class="md-raised md-accent" @click="cancel">Cancel</md-button>
       </div>
   </modal>
 </template>

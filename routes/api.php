@@ -68,6 +68,8 @@ Route::group(['middleware' => 'auth:api', 'prefix' => '/'], function () {
     Route::get('/my-projects/{id}/members', 'ProjectController@getOtherMembers');
     Route::get('/notifications/latest', 'NotificationController@getLatestNotifications');
     Route::get('/notifications/all', 'NotificationController@getAllNotifications');
+    Route::get('/notifications/{id}', 'NotificationController@getNotificationDetail');
+    Route::post('/notifications/delete/{id}', 'NotificationController@deleteNotification');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {

@@ -62,8 +62,8 @@
           </div>
         </md-field>
         <div class="md-right">
-          <md-button class="md-raised md-primary" @click="submit">Gửi</md-button>
-          <md-button class="md-raised md-accent" @click="cancel">Bỏ qua</md-button>
+          <md-button class="md-raised md-primary" @click="submit">Submit</md-button>
+          <md-button class="md-raised md-accent" @click="cancel">Cancel</md-button>
         </div>
       </div>
     </modal>
@@ -142,7 +142,7 @@ export default {
         this.$modal.hide('member');
         this.$emit('refresh');
       });
-      this.$toasted.show('Cập nhật nhân viên thành công!', {
+      this.$toasted.show('Update successfully!', {
         theme: 'bubble',
         position: 'top-right',
         duration : 1500,

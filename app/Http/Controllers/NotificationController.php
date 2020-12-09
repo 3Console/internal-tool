@@ -25,4 +25,23 @@ class NotificationController extends Controller
     {
         return $this->notificationService->getAllNotifications(Auth::id());
     }
+
+    public function getNotificationDetail(Request $request)
+    {
+        return $this->notificationService->getNotificationDetail($request->id);
+    }
+
+    public function deleteNotification(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $notification = $this->notificationService->deleteNotification($request->id);
+            DB::commit();
+            return $notification;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw $e;
+        }
+    }
 }

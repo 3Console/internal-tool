@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     toOvertimeList() {
-      this.$router.push({ name: 'OTManagement' });
+      this.$router.push({ name: 'Overtime Management' });
     },
     getOvertimeDetail() {
       return rf.getRequest('UserOvertimeRequest').getUserOvertimeDetail(this.overtime_id).then(res => {
