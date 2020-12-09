@@ -28,6 +28,7 @@ import PaySlip from '@/pages/user/PaySlip.vue';
 import PaySlipDetail from '@/pages/user/PaySlipDetail';
 import MyProject from '@/pages/user/MyProject';
 import MyProjectDetail from '@/pages/user/MyProjectDetail';
+import Notification from '@/pages/user/Notification';
 
 
 export default {
@@ -150,6 +151,13 @@ export default {
                     meta: {
                         requiresAuth: true
                     }
+                }, {
+                    path: 'notifications',
+                    name: 'Notification',
+                    component: Notification,
+                    meta: {
+                        requiresAuth: true
+                    }
                 }
             ]
         },
@@ -159,7 +167,7 @@ export default {
             redirect: '/admin/dashboard',
             children: [{
                     path: 'dashboard',
-                    name: 'Trang chủ',
+                    name: 'Dashboard',
                     component: AdminDashboard,
                     meta: {
                         requiresAdmin: true
@@ -167,7 +175,7 @@ export default {
                 },
                 {
                     path: 'employee',
-                    name: 'Nhân viên',
+                    name: 'Employee',
                     component: AdminEmployee,
                     meta: {
                         requiresAdmin: true
@@ -175,7 +183,7 @@ export default {
                 },
                 {
                     path: 'absence',
-                    name: 'AbsenceManagement',
+                    name: 'Absence Management',
                     component: AbsenceManagement,
                     meta: {
                         requiresAdmin: true
@@ -183,7 +191,7 @@ export default {
                 },
                 {
                     path: 'absence/:id',
-                    name: 'AbsenceManagementDetail',
+                    name: 'Absence Management Detail',
                     component: AbsenceManagementDetail,
                     meta: {
                         requiresAdmin: true
@@ -191,7 +199,7 @@ export default {
                 },
                 {
                     path: 'overtime',
-                    name: 'OTManagement',
+                    name: 'Overtime Management',
                     component: OTManagement,
                     meta: {
                         requiresAdmin: true
@@ -199,7 +207,7 @@ export default {
                 },
                 {
                     path: 'overtime/:id',
-                    name: 'OTManagementDetail',
+                    name: 'Overtime Management Detail',
                     component: OTManagementDetail,
                     meta: {
                         requiresAdmin: true
@@ -207,7 +215,7 @@ export default {
                 },
                 {
                     path: 'salary',
-                    name: 'Bảng lương tháng',
+                    name: 'Pay Slip',
                     component: SalaryManagement,
                     meta: {
                         requiresAdmin: true

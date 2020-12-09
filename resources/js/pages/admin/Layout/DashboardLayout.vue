@@ -6,11 +6,11 @@
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/admin/dashboard">
         <md-icon>dashboard</md-icon>
-        <p>Trang chủ</p>
+        <p>Dashboard</p>
       </sidebar-link>
       <sidebar-link to="/admin/employee">
         <md-icon>content_paste</md-icon>
-        <p>Nhân viên</p>
+        <p>Employee</p>
       </sidebar-link>
       <sidebar-link to="/admin/project">
         <md-icon>content_paste</md-icon>
@@ -18,15 +18,15 @@
       </sidebar-link>
       <sidebar-link to="/admin/absence">
         <md-icon>content_paste</md-icon>
-        <p>Xét duyệt nghỉ phép</p>
+        <p>Absence Management</p>
       </sidebar-link>
       <sidebar-link to="/admin/overtime">
         <md-icon>content_paste</md-icon>
-        <p>Xét duyệt OT</p>
+        <p>Overtime Management</p>
       </sidebar-link>
       <sidebar-link to="/admin/salary">
         <md-icon>content_paste</md-icon>
-        <p>Bảng lương tháng</p>
+        <p>Pay slip</p>
       </sidebar-link>
     </side-bar>
 

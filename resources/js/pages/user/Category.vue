@@ -7,10 +7,14 @@
         <a-col :span="16" class="card-center">
           <div class="title">Home</div>
           <a-card title="Notifications" style="width: 100%">
-            <a slot="extra" href="#">See all >></a>
-            <p>card content</p>
-            <p>card content</p>
-            <p>card content</p>
+            <a slot="extra" @click="goToNotification">See all >></a>
+            <template v-for="notification in notifications">
+              <div :key="notification.id" style="margin-bottom: 10px">
+                <span>{{ notification.title }}</span>
+                <span class="dot-divider">~</span>
+                <span class="italic">{{ notification.created_at | fromNow }}</span>
+              </div>
+            </template>
           </a-card>
           <a-divider class="divider"/>
         </a-col>
@@ -85,23 +89,26 @@ export default {
   data() {
     return {
       categories: [],
-      params: {}
+      params: {},
+      notifications: []
     }
   },
   methods: {
     getCategories(params) {
-        rf.getRequest('CategoryRequest').getCategories().then(res => {
-            this.categories = res;
-        })
+      rf.getRequest('CategoryRequest').getCategories().then(res => {
+        this.categories = res;
+      })
     },
     createCategory() {
-        this.$modal.show('category', { title: 'Thêm danh mục mới' });
+      this.$modal.show('category', { title: 'Thêm danh mục mới' });
     },
-    goToPhrase() {
-        this.$router.push({ name: 'Phrase' })
+    getLatestNotifications() {
+      return rf.getRequest('NotificationRequest').getLatestNotifications().then(res => {
+        this.notifications = res;
+      })
     },
-    goToCategory(slug) {
-        this.$router.push(`/category/${slug}`);
+    goToNotification() {
+      this.$router.push('/notifications')
     },
     goToAbsence() {
       this.$router.push('/absence')
@@ -116,11 +123,11 @@ export default {
       this.$router.push('/project')
     },
     refresh() {
-        this.getCategories();
+      this.getCategories();
     }
   },
-  mounted() {
-      this.getCategories();
+  created() {
+    this.getLatestNotifications();
   }
 }
 </script>
@@ -129,7 +136,7 @@ export default {
   .content {
     padding: 20px 12px;
     position: relative;
-    top: -250px;
+    top: -220px;
   }
 
   .background-header {
@@ -142,6 +149,14 @@ export default {
     color: #fff;
     font-size: 32px;
     font-weight: 500;
+  }
+
+  .dot-divider {
+    margin: 0 10px;
+  }
+
+  .italic {
+    font-style: italic;
   }
 
   .divider {

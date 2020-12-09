@@ -6,7 +6,7 @@
         </div>
         <div class="md-layout-item md-size-30">
           <md-field >
-            <label>Tìm kiếm</label>
+            <label>Search</label>
             <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()"></md-input>
             <md-icon>search</md-icon>
           </md-field>
@@ -14,15 +14,15 @@
         <div class="md-layout-item md-size-35">
         </div>
         <div class="md-layout-item">
-          <md-button  class="md-success" @click="createEmployee">Thêm</md-button>
-          <md-button  class="md-info" @click="refresh">Làm mới</md-button>
-          <md-button  class="md-danger" @click="removeManyEmployees()">Xóa</md-button>
+          <md-button  class="md-success" @click="createEmployee">Add</md-button>
+          <md-button  class="md-info" @click="refresh">Refresh</md-button>
+          <md-button  class="md-danger" @click="removeManyEmployees()">Delete</md-button>
         </div>
       </div>
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">Quản lí nhân viên</h4>
+            <h4 class="title">Employees</h4>
             <p class="category">Here is a subtitle for this table</p>
           </md-card-header>
           <md-card-content>
@@ -30,11 +30,11 @@
                 <th class="col_checkbox">
                   <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
                 </th>
-                <th class="col_title_en">Tên đăng nhập</th>
+                <th class="col_title_en">Username</th>
                 <th class="col_title_jp">Email</th>
-                <th class="col_summary_en">Tên</th>
-                <th class="col_created_at">Ngày tạo</th>
-                <th class="col_tools">Công cụ</th>
+                <th class="col_summary_en">Full Name</th>
+                <th class="col_created_at">Created At</th>
+                <th class="col_tools">Action</th>
                 <template slot="body" slot-scope="{ item }">
                   <tr>
                     <td class="text-center">
@@ -47,11 +47,11 @@
                     <td class="text-center">
                         <md-button class="md-just-icon md-simple md-primary" @click="editEmployee(item.id)">
                           <md-icon>edit</md-icon>
-                          <md-tooltip md-direction="top">Sửa</md-tooltip>
+                          <md-tooltip md-direction="top">Edit</md-tooltip>
                         </md-button>
                         <md-button class="md-just-icon md-simple md-danger" @click="removeOneEmployee(item.id)">
                           <md-icon>close</md-icon>
-                          <md-tooltip md-direction="top">Xóa</md-tooltip>
+                          <md-tooltip md-direction="top">Delete</md-tooltip>
                         </md-button>
                     </td>
                   </tr>
@@ -90,23 +90,23 @@ export default{
   methods: {
     removeOneEmployee(employeeId) {
       this.$modal.show('dialog', {
-        title: 'Cảnh báo!',
-        text: 'Bạn có chắc chắn muốn xóa ?',
+        title: 'Warning!',
+        text: 'Are you sure to delete ?',
         buttons: [
           {
-            title: 'Bỏ qua',
+            title: 'Cancel',
             handler: () => {
               this.$modal.hide('dialog');
             }
           },
           {
-            title: 'Xác nhận',
+            title: 'Confirm',
             default: true,
             handler: () => {
               return rf.getRequest('EmployeeRequest').removeOneEmployee(employeeId).then(() => {
                 this.$modal.hide('dialog');
                 this.$refs.datatable.refresh();
-                this.$toasted.show('Xóa nhân viên thành công!', {
+                this.$toasted.show('Delete employee successfully!', {
                   theme: 'bubble',
                   position: 'top-right',
                   duration : 1500,
@@ -120,17 +120,17 @@ export default{
     },
     removeManyEmployees() {
         this.$modal.show('dialog', {
-          title: 'Cảnh báo!',
-          text: 'Bạn có chắc chắn muốn xóa ?',
+          title: 'Warning!',
+          text: 'Are you sure to delete ?',
           buttons: [
             {
-              title: 'Bỏ qua',
+              title: 'Cancel',
               handler: () => {
                 this.$modal.hide('dialog');
               }
             },
             {
-              title: 'Xác nhận',
+              title: 'Confirm',
               default: true,
               handler: () => {
                 const employeeIds = this.$refs.datatable.rows.filter((row) => {
@@ -140,7 +140,7 @@ export default{
                 return rf.getRequest('EmployeeRequest').removeManyEmployeess(employeeIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Xóa nhân viên thành công!', {
+                  this.$toasted.show('Delete employee successfully!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,
@@ -153,10 +153,10 @@ export default{
         });
       },
       createEmployee() {
-        this.$modal.show('employee', {title: 'Thêm nhân viên'});
+        this.$modal.show('employee', {title: 'Add employee'});
       },
       editEmployee(employeeId) {
-        this.$modal.show('employee', {title: 'Sửa thông tin nhân viên', employeeId: employeeId});
+        this.$modal.show('employee', {title: 'Edit employee', employeeId: employeeId});
       },
       listenSelectRow() {
         if (!this.$refs.datatable) {

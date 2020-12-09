@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     toAbsenceList() {
-      this.$router.push({ name: 'AbsenceManagement' });
+      this.$router.push({ name: 'Absence Management' });
     },
     getAbsenceDetail() {
       return rf.getRequest('UserAbsenceRequest').getUserAbsenceDetail(this.absence_id).then(res => {

@@ -6,7 +6,7 @@
         </div>
         <div class="md-layout-item md-size-30">
           <md-field >
-            <label>Tìm kiếm</label>
+            <label>Search</label>
             <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()"></md-input>
             <md-icon>search</md-icon>
           </md-field>
@@ -14,9 +14,9 @@
         <div class="md-layout-item md-size-35">
         </div>
         <div class="md-layout-item">
-          <md-button  class="md-success" @click="createProject">Thêm</md-button>
-          <md-button  class="md-info" @click="refresh">Làm mới</md-button>
-          <md-button  class="md-danger">Xóa</md-button>
+          <md-button  class="md-success" @click="createProject">Add</md-button>
+          <md-button  class="md-info" @click="refresh">Refresh</md-button>
+          <md-button  class="md-danger">Delete</md-button>
         </div>
       </div>
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
