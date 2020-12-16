@@ -6,6 +6,8 @@ use App\User;
 use App\Models\UserOvertimeRequest;
 use App\Models\UserProject;
 use App\Models\Project;
+use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class UserOvertimeService
 {
@@ -27,6 +29,14 @@ class UserOvertimeService
         $userOvertime = UserOvertimeRequest::where('id', $input['id'])->first();
         $userOvertime->status = 'approved';
         $userOvertime->save();
+
+        $notification = Notification::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $userOvertime->user_id,
+            'title' => 'Your overtime request has been approved',
+            'content' => 'Your overtime request has been approved'
+        ]);
+
         return $userOvertime;
     }
 
@@ -35,6 +45,14 @@ class UserOvertimeService
         $userOvertime = UserOvertimeRequest::where('id', $input['id'])->first();
         $userOvertime->status = 'rejected';
         $userOvertime->save();
+
+        $notification = Notification::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $userOvertime->user_id,
+            'title' => 'Your overtime request has been rejected',
+            'content' => 'Your overtime request has been rejected'
+        ]);
+
         return $userOvertime;
     }
 
@@ -47,6 +65,13 @@ class UserOvertimeService
             'reason' => $params['content'],
             'start_date' => $params['start_date'],
             'end_date' => $params['end_date']
+        ]);
+
+        $notification = Notification::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $userId,
+            'title' => 'Your overtime request has been sent',
+            'content' => 'Your overtime request has been sent'
         ]);
 
         return $userOvertime;
