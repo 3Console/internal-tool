@@ -6,6 +6,8 @@ use App\User;
 use App\Models\UserAbsenceRequest;
 use App\Models\UserOvertimeRequest;
 use App\Models\PaySlip;
+use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class SalaryService
 {
@@ -47,6 +49,13 @@ class SalaryService
             'support_amount' => $params['support_amount'],
             'bonus_amount' => $params['bonus_amount'],
             'violation_amount' => $params['violation_amount']
+        ]);
+
+        $notification = Notification::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $params['user_id'],
+            'title' => 'You have received this month pay slip',
+            'content' => 'You have received this month pay slip'
         ]);
 
         return $paySlip;

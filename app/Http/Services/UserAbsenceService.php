@@ -5,6 +5,8 @@ namespace App\Http\Services;
 use App\User;
 use App\Models\UserAbsenceRequest;
 use App\Models\AbsenceType;
+use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class UserAbsenceService
 {
@@ -27,6 +29,14 @@ class UserAbsenceService
         $userAbsence = UserAbsenceRequest::where('id', $input['id'])->first();
         $userAbsence->status = 'approved';
         $userAbsence->save();
+
+        $notification = Notification::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $userAbsence->user_id,
+            'title' => 'Your absence request has been approved',
+            'content' => 'Your absence request has been approved'
+        ]);
+
         return $userAbsence;
     }
 
@@ -35,6 +45,14 @@ class UserAbsenceService
         $userAbsence = UserAbsenceRequest::where('id', $input['id'])->first();
         $userAbsence->status = 'rejected';
         $userAbsence->save();
+
+        $notification = Notification::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $userAbsence->user_id,
+            'title' => 'Your absence request has been rejected',
+            'content' => 'Your absence request has been rejected'
+        ]);
+
         return $userAbsence;
     }
 
@@ -47,6 +65,13 @@ class UserAbsenceService
             'reason' => $params['content'],
             'start_date' => $params['start_date'],
             'end_date' => $params['end_date']
+        ]);
+
+        $notification = Notification::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $userId,
+            'title' => 'Your absence request has been sent',
+            'content' => 'Your absence request has been sent'
         ]);
 
         return $userAbsence;
