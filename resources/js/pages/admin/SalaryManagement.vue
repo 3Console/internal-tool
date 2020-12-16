@@ -285,7 +285,15 @@ export default {
         bonus_amount: this.bonus_amount,
         violation_amount: this.violation_amount
       }
-      return rf.getRequest('SalaryRequest').submitPaySlip(meta);
+      return rf.getRequest('SalaryRequest').submitPaySlip(meta).then(res => {
+        this.$toasted.show('Submit successfully!', {
+          theme: 'bubble',
+          position: 'bottom-right',
+          duration : 1500,
+          type: 'success'
+        });
+        this.isConfirmation = false;
+      });
     }
   },
   created() {

@@ -88,13 +88,12 @@ export default {
       rf.getRequest('ProjectRequest').createProject({project_name: this.project_name}).then((res)=>{
         this.$modal.hide('project');
         this.$emit('refresh');
-      }).catch((err) => {
-        // this.$toasted.show('Đã có lỗi xảy ra, vui lòng kiểm tra lại!', {
-        //   theme: 'bubble',
-        //   position: 'top-right',
-        //   duration : 1500,
-        //   type: 'danger'
-        // });
+      });
+      this.$toasted.show('Create successfully!', {
+        theme: 'bubble',
+        position: 'bottom-right',
+        duration : 1500,
+        type: 'success'
       });
     },
     updateProject() {
@@ -104,7 +103,7 @@ export default {
       });
       this.$toasted.show('Update successfully!', {
         theme: 'bubble',
-        position: 'top-right',
+        position: 'bottom-right',
         duration : 1500,
         type: 'success'
       });

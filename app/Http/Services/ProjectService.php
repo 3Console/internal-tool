@@ -12,17 +12,12 @@ class ProjectService
     public function getProjects($params)
     {
         $limit = array_get($params, 'limit', 10);
-        return Project::join('user_projects', 'projects.id', 'user_projects.project_id')
-                    ->join('users', 'user_projects.user_id', 'users.id')
-                    ->join('positions', 'user_projects.position_id', 'positions.id')
-                    ->where('positions.name', 'Project manager')
-                    ->select('projects.id' ,'projects.name', 'projects.status', 'users.full_name')
+        return Project::select('*')
                     ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
                         $search = array_get($params, 'search');
-                        return $query->where('projects.name', 'like', "%$search%")
-                                    ->orWhere('projects.status', 'like', "%$search%")
-                                    ->orWhere('users.full_name', 'like', "%$search%");
-                        })->orderBy('projects.created_at', 'desc')
+                        return $query->where('name', 'like', "%$search%")
+                                    ->orWhere('status', 'like', "%$search%");
+                        })->orderBy('created_at', 'desc')
                     ->paginate($limit);
     }
 

@@ -128,13 +128,12 @@ export default {
       rf.getRequest('ProjectRequest').addMember({user_id: this.user_id, project_id: this.project_id, position: this.position}).then((res)=>{
         this.$modal.hide('member');
         this.$emit('refresh');
-      }).catch((err) => {
-        // this.$toasted.show('Đã có lỗi xảy ra, vui lòng kiểm tra lại!', {
-        //   theme: 'bubble',
-        //   position: 'top-right',
-        //   duration : 1500,
-        //   type: 'danger'
-        // });
+      });
+      this.$toasted.show('Create successfully!', {
+        theme: 'bubble',
+        position: 'bottom-right',
+        duration : 1500,
+        type: 'success'
       });
     },
     updateMember() {
@@ -144,7 +143,7 @@ export default {
       });
       this.$toasted.show('Update successfully!', {
         theme: 'bubble',
-        position: 'top-right',
+        position: 'bottom-right',
         duration : 1500,
         type: 'success'
       });

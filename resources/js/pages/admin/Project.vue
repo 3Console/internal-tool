@@ -31,16 +31,14 @@
                 <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
               </th>
               <th class="col_title_en">Project Name</th>
-              <th class="col_project_manager">Project Manager</th>
               <th class="col_title_jp">Status</th>
-              <th class="col_tools">Công cụ</th>
+              <th class="col_tools">Action</th>
               <template slot="body" slot-scope="{ item }">
                 <tr>
                   <td class="text-center">
                     <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
                   </td>
                   <td class="text-center" v-html="item.name" @click="toProjectDetail(item.id)" style="cursor: pointer"></td>
-                  <td class="text-center" v-html="item.full_name"></td>
                   <td class="text-center" v-html="item.status"></td>
                   <td class="text-center">
                       <md-button class="md-just-icon md-simple md-primary" @click="editProject(item.id)">
