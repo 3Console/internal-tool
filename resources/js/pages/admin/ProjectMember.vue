@@ -33,7 +33,7 @@
               <th class="col_name">Name</th>
               <th class="col_email">Email</th>
               <th class="col_project_manager">Position</th>
-              <th class="col_tools">Công cụ</th>
+              <th class="col_tools">Action</th>
               <template slot="body" slot-scope="{ item }">
                 <tr>
                   <td class="text-center">

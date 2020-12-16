@@ -108,7 +108,7 @@ export default{
                 this.$refs.datatable.refresh();
                 this.$toasted.show('Delete employee successfully!', {
                   theme: 'bubble',
-                  position: 'top-right',
+                  position: 'bottom-right',
                   duration : 1500,
                   type: 'success'
                 });
@@ -142,7 +142,7 @@ export default{
                   this.$refs.datatable.refresh();
                   this.$toasted.show('Delete employee successfully!', {
                     theme: 'bubble',
-                    position: 'top-right',
+                    position: 'bottom-right',
                     duration : 1500,
                     type: 'success'
                   });

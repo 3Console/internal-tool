@@ -42,7 +42,7 @@
                       <td class="text-center" v-html="item.created_at"></td>
                       <td class="text-center">
                           <md-button class="md-just-icon md-simple md-primary" @click="approveRequest(item.request_id)">
-                            <md-icon>edit</md-icon>
+                            <md-icon>done</md-icon>
                             <md-tooltip md-direction="top">Approve</md-tooltip>
                           </md-button>
                           <md-button class="md-just-icon md-simple md-danger" @click="rejectRequest(item.request_id)">
@@ -162,23 +162,23 @@
       },
       approveRequest(requestId) {
         this.$modal.show('dialog', {
-          title: 'Cảnh báo!',
-          text: 'Bạn có muốn phê duyệt yêu cầu này ?',
+          title: 'Warning!',
+          text: 'Are you sure to approve this request ?',
           buttons: [
             {
-              title: 'Bỏ qua',
+              title: 'Cancel',
               handler: () => {
                 this.$modal.hide('dialog');
               }
             },
             {
-              title: 'Xác nhận',
+              title: 'Confirm',
               default: true,
               handler: () => {
                 return rf.getRequest('UserAbsenceRequest').approveRequest({ id: requestId }).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Phê duyệt thành công!', {
+                  this.$toasted.show('Approve successfully!', {
                     theme: 'bubble',
                     position: 'bottom-right',
                     duration : 1500,
@@ -192,23 +192,23 @@
       },
       rejectRequest(requestId) {
         this.$modal.show('dialog', {
-          title: 'Cảnh báo!',
-          text: 'Bạn có muốn từ chối yêu cầu này ?',
+          title: 'Warning!',
+          text: 'Are you sure to reject this request ?',
           buttons: [
             {
-              title: 'Bỏ qua',
+              title: 'Cancel',
               handler: () => {
                 this.$modal.hide('dialog');
               }
             },
             {
-              title: 'Xác nhận',
+              title: 'Confirm',
               default: true,
               handler: () => {
                 return rf.getRequest('UserAbsenceRequest').rejectRequest({ id: requestId }).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Từ chối thành công!', {
+                  this.$toasted.show('Reject successfully!', {
                     theme: 'bubble',
                     position: 'bottom-right',
                     duration : 1500,

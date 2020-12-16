@@ -176,25 +176,24 @@ export default {
         this.$modal.hide('employee');
         this.$emit('refresh');
       });
-      this.$toasted.show('Cập nhật nhân viên thành công!', {
+      this.$toasted.show('Update employee successfully!', {
         theme: 'bubble',
-        position: 'top-right',
+        position: 'bottom-right',
         duration : 1500,
         type: 'success'
       });
     },
     createOneEmployee() {
-          rf.getRequest('EmployeeRequest').store(this.employee).then((res)=>{
-            this.$modal.hide('employee');
-            this.$emit('refresh');
-          }).catch((err) => {
-            // this.$toasted.show('Đã có lỗi xảy ra, vui lòng kiểm tra lại!', {
-            //   theme: 'bubble',
-            //   position: 'top-right',
-            //   duration : 1500,
-            //   type: 'danger'
-            // });
-          });
+      rf.getRequest('EmployeeRequest').store(this.employee).then((res)=>{
+        this.$modal.hide('employee');
+        this.$emit('refresh');
+      });
+      this.$toasted.show('Create employee successfully!', {
+        theme: 'bubble',
+        position: 'bottom-right',
+        duration : 1500,
+        type: 'success'
+      });
     },
     cancel() {
       this.$modal.hide('employee');
